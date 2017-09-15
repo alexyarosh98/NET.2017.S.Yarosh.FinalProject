@@ -1,0 +1,44 @@
+﻿@model BLLInterface.Models.UserEntity
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        @Html.LabelFor(x=>x.Nickname)
+        @Html.EditorFor(x=>x.Nickname)
+        @Html.ValidationMessageFor(x=>x.Nickname)
+        <br/>
+        @Html.LabelFor(x=>x.Possword)
+        @Html.EditorFor(x => x.Possword)
+        @Html.ValidationMessageFor(x => x.Possword)
+        <br/>
+        @Html.LabelFor(x => x.PosswordConfirm)
+        @Html.EditorFor(x => x.PosswordConfirm)
+        <br/>
+        @Html.LabelFor(x => x.Email)
+        @Html.EditorFor(x => x.Email)
+        @Html.ValidationMessageFor(x => x.Email)
+        <br/>
+        @Html.LabelFor(x => x.Firstname)
+        @Html.EditorFor(x => x.Firstname)
+        @Html.ValidationMessageFor(x => x.Firstname)
+        <br/>
+        @Html.LabelFor(x => x.Lastname)
+        @Html.EditorFor(x => x.Lastname)
+        @Html.ValidationMessageFor(x => x.Lastname)
+        <br/>
+        @Html.LabelFor(x => x.Age)
+        @Html.EditorFor(x => x.Age)
+        @Html.ValidationMessageFor(x => x.Age)
+        <br/>
+        @Html.LabelFor(x => x.Gender)
+        @Html.DropDownList("Gender", new SelectList(new[] 
+        { new { Id = true, Name = "man" }, new { Id = false, Name = "woman" } }, "Id", "Name"), "")<br />
+        <input type="submit" value="Register" />
+    </fieldset>
+}

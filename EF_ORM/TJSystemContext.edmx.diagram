@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="64ae794bfc3e447293078f47b1cde421" Name="Diagram1" >
+        <EntityTypeShape EntityType="TJSystemContext.User" Width="1.5" PointX="5.875" PointY="1.25" />
+        <EntityTypeShape EntityType="TJSystemContext.UserInfo" Width="1.5" PointX="9" PointY="1.375" />
+        <EntityTypeShape EntityType="TJSystemContext.Category" Width="1.5" PointX="0.5" PointY="5" />
+        <EntityTypeShape EntityType="TJSystemContext.Task" Width="1.5" PointX="0.5" PointY="1.875" />
+        <AssociationConnector Association="TJSystemContext.Category_1toM_Task" />
+        <EntityTypeShape EntityType="TJSystemContext.TaskInfo" Width="1.5" PointX="3" PointY="1.375" />
+        <AssociationConnector Association="TJSystemContext.Task_1to1_TaskInfo" />
+        <AssociationConnector Association="TJSystemContext.UserTaskInfo" />
+        <AssociationConnector Association="TJSystemContext.UserUserInfo" />
+        <AssociationConnector Association="TJSystemContext.TaskInfoUser" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

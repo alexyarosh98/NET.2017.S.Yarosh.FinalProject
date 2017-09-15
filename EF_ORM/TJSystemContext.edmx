@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TJSystemContext.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TJSystemContextStoreContainer">
+    <EntitySet Name="Users" EntityType="TJSystemContext.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserInfoes" EntityType="TJSystemContext.Store.UserInfoes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categories" EntityType="TJSystemContext.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tasks" EntityType="TJSystemContext.Store.Tasks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TaskInfoes" EntityType="TJSystemContext.Store.TaskInfoes" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="Category_1toM_Task" Association="TJSystemContext.Store.Category_1toM_Task">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="Task_1to1_TaskInfo" Association="TJSystemContext.Store.Task_1to1_TaskInfo">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="TaskInfo" EntitySet="TaskInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="UserTaskInfo" Association="TJSystemContext.Store.UserTaskInfo">
+      <End Role="User" EntitySet="Users" />
+      <End Role="TaskInfo" EntitySet="TaskInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="UserUserInfo" Association="TJSystemContext.Store.UserUserInfo">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserInfo" EntitySet="UserInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="TaskInfoUser" Association="TJSystemContext.Store.TaskInfoUser">
+      <End Role="TaskInfo" EntitySet="TaskInfoes" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nickname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Possword" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Role" Type="tinyint" Nullable="false" />
+    <Property Name="Rating" Type="float" Nullable="false" DefaultValue="0" />
+  </EntityType>
+  <EntityType Name="UserInfoes">
+    <Key>
+      <PropertyRef Name="UserInfoId" />
+    </Key>
+    <Property Name="UserInfoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Firstname" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Lastname" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Age" Type="smallint" Nullable="true" />
+    <Property Name="Gender" Type="bit" Nullable="true" />
+    <Property Name="User_UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tasks">
+    <Key>
+      <PropertyRef Name="TaskId" />
+    </Key>
+    <Property Name="TaskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="TaskInfo_TaskInfoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskInfoes">
+    <Key>
+      <PropertyRef Name="TaskInfoId" />
+    </Key>
+    <Property Name="TaskInfoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Deadline" Type="datetime" Nullable="false" />
+    <Property Name="Implementation" Type="smallint" Nullable="false" DefaultValue="0" />
+    <Property Name="CreatorUserId" Type="int" Nullable="false" />
+    <Property Name="Developer_UserId" Type="int" Nullable="true" />
+  </EntityType>
+  <Association Name="Category_1toM_Task">
+    <End Role="Category" Type="TJSystemContext.Store.Categories" Multiplicity="1" />
+    <End Role="Task" Type="TJSystemContext.Store.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Task_1to1_TaskInfo">
+    <End Role="Task" Type="TJSystemContext.Store.Tasks" Multiplicity="*" />
+    <End Role="TaskInfo" Type="TJSystemContext.Store.TaskInfoes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="TaskInfo">
+        <PropertyRef Name="TaskInfoId" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="TaskInfo_TaskInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserTaskInfo">
+    <End Role="User" Type="TJSystemContext.Store.Users" Multiplicity="1" />
+    <End Role="TaskInfo" Type="TJSystemContext.Store.TaskInfoes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TaskInfo">
+        <PropertyRef Name="CreatorUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserUserInfo">
+    <End Role="User" Type="TJSystemContext.Store.Users" Multiplicity="1" />
+    <End Role="UserInfo" Type="TJSystemContext.Store.UserInfoes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="User_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TaskInfoUser">
+    <End Role="TaskInfo" Type="TJSystemContext.Store.TaskInfoes" Multiplicity="*" />
+    <End Role="User" Type="TJSystemContext.Store.Users" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TaskInfo">
+        <PropertyRef Name="Developer_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="TJSystemContext" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="TJSystemContextContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="TJSystemContext.User" />
+          <EntitySet Name="UserInfoes" EntityType="TJSystemContext.UserInfo" />
+          <EntitySet Name="Categories" EntityType="TJSystemContext.Category" />
+          <EntitySet Name="Tasks" EntityType="TJSystemContext.Task" />
+          <AssociationSet Name="Category_1toM_Task" Association="TJSystemContext.Category_1toM_Task">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <EntitySet Name="TaskInfoes" EntityType="TJSystemContext.TaskInfo" />
+          <AssociationSet Name="Task_1to1_TaskInfo" Association="TJSystemContext.Task_1to1_TaskInfo">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="TaskInfo" EntitySet="TaskInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="UserTaskInfo" Association="TJSystemContext.UserTaskInfo">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TaskInfo" EntitySet="TaskInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="UserUserInfo" Association="TJSystemContext.UserUserInfo">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="TaskInfoUser" Association="TJSystemContext.TaskInfoUser">
+            <End Role="TaskInfo" EntitySet="TaskInfoes" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nickname" Type="String" Nullable="false" />
+          <Property Name="Possword" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Role" Type="Byte" Nullable="false" />
+          <Property Name="Rating" Type="Double" Nullable="false" DefaultValue="0.0" />
+          <NavigationProperty Name="CreatedTasks" Relationship="TJSystemContext.UserTaskInfo" FromRole="User" ToRole="TaskInfo" />
+          <NavigationProperty Name="UserInfo" Relationship="TJSystemContext.UserUserInfo" FromRole="User" ToRole="UserInfo" />
+          <NavigationProperty Name="DevelopedTasks" Relationship="TJSystemContext.TaskInfoUser" FromRole="User" ToRole="TaskInfo" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserInfoId" />
+          </Key>
+          <Property Name="UserInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="String" Nullable="true" />
+          <Property Name="Lastname" Type="String" Nullable="true" />
+          <Property Name="Age" Type="Int16" Nullable="true" />
+          <Property Name="Gender" Type="Boolean" Nullable="true" />
+          <NavigationProperty Name="User" Relationship="TJSystemContext.UserUserInfo" FromRole="UserInfo" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Tasks" Relationship="TJSystemContext.Category_1toM_Task" FromRole="Category" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="TJSystemContext.Category_1toM_Task" FromRole="Task" ToRole="Category" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TaskInfo" Relationship="TJSystemContext.Task_1to1_TaskInfo" FromRole="Task" ToRole="TaskInfo" />
+        </EntityType>
+        <Association Name="Category_1toM_Task">
+          <End Type="TJSystemContext.Category" Role="Category" Multiplicity="1" />
+          <End Type="TJSystemContext.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TaskInfo">
+          <Key>
+            <PropertyRef Name="TaskInfoId" />
+          </Key>
+          <Property Name="TaskInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Deadline" Type="DateTime" Nullable="false" />
+          <Property Name="Implementation" Type="Int16" Nullable="false" DefaultValue="0" />
+          <NavigationProperty Name="Task" Relationship="TJSystemContext.Task_1to1_TaskInfo" FromRole="TaskInfo" ToRole="Task" />
+          <NavigationProperty Name="CreatorUser" Relationship="TJSystemContext.UserTaskInfo" FromRole="TaskInfo" ToRole="User" />
+          <Property Name="CreatorUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Developer" Relationship="TJSystemContext.TaskInfoUser" FromRole="TaskInfo" ToRole="User" />
+        </EntityType>
+        <Association Name="Task_1to1_TaskInfo">
+          <End Type="TJSystemContext.Task" Role="Task" Multiplicity="1" />
+          <End Type="TJSystemContext.TaskInfo" Role="TaskInfo" Multiplicity="1" />
+        </Association>
+        <Association Name="UserTaskInfo">
+          <End Type="TJSystemContext.User" Role="User" Multiplicity="1" />
+          <End Type="TJSystemContext.TaskInfo" Role="TaskInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TaskInfo">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserUserInfo">
+          <End Type="TJSystemContext.User" Role="User" Multiplicity="1" />
+          <End Type="TJSystemContext.UserInfo" Role="UserInfo" Multiplicity="0..1" />
+        </Association>
+        <Association Name="TaskInfoUser">
+          <End Type="TJSystemContext.TaskInfo" Role="TaskInfo" Multiplicity="*" />
+          <End Type="TJSystemContext.User" Role="User" Multiplicity="0..1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TJSystemContextStoreContainer" CdmEntityContainer="TJSystemContextContainer">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(TJSystemContext.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+          <ScalarProperty Name="Possword" ColumnName="Possword" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInfoes">
+      <EntityTypeMapping TypeName="IsTypeOf(TJSystemContext.UserInfo)">
+        <MappingFragment StoreEntitySet="UserInfoes">
+          <ScalarProperty Name="UserInfoId" ColumnName="UserInfoId" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="IsTypeOf(TJSystemContext.Category)">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="IsTypeOf(TJSystemContext.Task)">
+        <MappingFragment StoreEntitySet="Tasks">
+          <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskInfoes">
+      <EntityTypeMapping TypeName="IsTypeOf(TJSystemContext.TaskInfo)">
+        <MappingFragment StoreEntitySet="TaskInfoes">
+          <ScalarProperty Name="TaskInfoId" ColumnName="TaskInfoId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+          <ScalarProperty Name="Implementation" ColumnName="Implementation" />
+          <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Task_1to1_TaskInfo" TypeName="TJSystemContext.Task_1to1_TaskInfo" StoreEntitySet="Tasks">
+      <EndProperty Name="TaskInfo">
+        <ScalarProperty Name="TaskInfoId" ColumnName="TaskInfo_TaskInfoId" />
+      </EndProperty>
+      <EndProperty Name="Task">
+        <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserUserInfo" TypeName="TJSystemContext.UserUserInfo" StoreEntitySet="UserInfoes">
+      <EndProperty Name="User">
+        <ScalarProperty Name="UserId" ColumnName="User_UserId" />
+      </EndProperty>
+      <EndProperty Name="UserInfo">
+        <ScalarProperty Name="UserInfoId" ColumnName="UserInfoId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TaskInfoUser" TypeName="TJSystemContext.TaskInfoUser" StoreEntitySet="TaskInfoes">
+      <EndProperty Name="User">
+        <ScalarProperty Name="UserId" ColumnName="Developer_UserId" />
+      </EndProperty>
+      <EndProperty Name="TaskInfo">
+        <ScalarProperty Name="TaskInfoId" ColumnName="TaskInfoId" />
+      </EndProperty>
+      <Condition ColumnName="Developer_UserId" IsNull="false" />
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
