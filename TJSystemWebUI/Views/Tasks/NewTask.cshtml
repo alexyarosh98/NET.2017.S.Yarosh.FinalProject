@@ -1,0 +1,39 @@
+﻿@model BLLInterface.Models.TaskEntity
+@{
+    ViewBag.Title = "NewTask";
+}
+
+<h2>NewTask</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(x=>x.Title)
+    @Html.EditorFor(x=>x.Title)
+    @Html.ValidationMessageFor(x=>x.Title)
+    <br/>
+    @Html.LabelFor(x=>x.Category)
+    @Html.DropDownList("Category",new SelectList(new []
+    {
+        new {Id="c#",Name="C#"},
+       new {Id="java",Name="Java"}
+    },"Id","Name"),"Select category")
+    @Html.ValidationMessageFor(x => x.Category)
+    <br />
+    @Html.LabelFor(x => x.Price)
+    @Html.EditorFor(x => x.Price)
+    @Html.ValidationMessageFor(x => x.Price)
+    <br />
+    @Html.LabelFor(x => x.Description)
+    @Html.TextAreaFor(x=>x.Description)
+    @Html.ValidationMessageFor(x => x.Description)
+    <br />
+    @Html.LabelFor(x => x.Deadline)
+    @Html.EditorFor(x => x.Deadline)
+    @Html.ValidationMessageFor(x => x.Deadline)
+    <br />
+    <input type="submit" value="Create"/>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

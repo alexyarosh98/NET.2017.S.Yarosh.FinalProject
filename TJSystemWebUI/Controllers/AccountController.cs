@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using BLLInterface.Models;
 using BLLInterface.Services;
+using TJSystemWebUI.Infastructure;
+using TJSystemWebUI.Models;
 
 namespace TJSystemWebUI.Controllers
 {
@@ -17,10 +21,11 @@ namespace TJSystemWebUI.Controllers
             userService = _service;
         }
         // GET: Account
+
+            
         public ActionResult Create()
         {
-            UserEntity newUser = new UserEntity();
-            return View(newUser);
+            return View();
         }
 
         [HttpPost]
@@ -31,7 +36,43 @@ namespace TJSystemWebUI.Controllers
                 userService.Register(newUser);
                 return RedirectToAction("Index", "Home");
             }
-            else return View();
+            return View();
+        }
+
+
+        public ActionResult Login()
+        {            
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Login(LogingUserModel model,string returnUrl)
+        {
+            UserEntity authUser;
+            try
+            {
+                 authUser = userService.GetUser(model.Email);
+
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", "Incorrect possword or email");
+
+                return View();
+            }
+
+            if (authUser.Possword == model.Possword)
+            {
+                FormsAuthentication.SetAuthCookie(authUser.Email,false);
+                return Redirect(returnUrl ?? Url.Action("Index","Home"));
+            }
+            else
+            {
+                ModelState.AddModelError("","Incorrect possword or email");
+
+                return View();
+            }
         }
     }
 }

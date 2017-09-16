@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -66,6 +67,7 @@ namespace DALLogic
 
         public DALUser GetByEmail(string email)
         {
+           
             User expectedUser=context.Set<User>().FirstOrDefault(user => user.Email == email);
             if(ReferenceEquals(expectedUser,null)) throw new InvalidOperationException();
 

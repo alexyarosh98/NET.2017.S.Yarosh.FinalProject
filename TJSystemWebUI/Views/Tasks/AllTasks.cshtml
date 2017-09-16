@@ -1,0 +1,33 @@
+﻿@model IEnumerable<BLLInterface.Models.TaskEntity>
+@{
+    ViewBag.Title = "AllTasks";
+}
+@Styles.Render("~/Content/TaskStyles.css")
+<h2 align="center">AllTasks</h2>
+
+
+<form action="NewTask"  >
+    <input type="submit" class="button" value="Add new task"/>
+</form>
+
+
+<ul class="border">
+    @foreach (var task in Model)
+    {
+        <li>
+            <h3 align="left">@task.Title </h3>
+            <h5>
+               Category: @task.Category 
+            </h5>
+            Status: @task.Status
+            <div align="right"><font color="red"> @task.Price $</font>
+            <br/>    
+            @Html.ActionLink("Fullinfo","TaskInfo",task)
+            </div>
+
+            
+        </li>
+  
+    }
+   
+</ul>

@@ -1,0 +1,20 @@
+﻿@model TJSystemWebUI.Models.LogingUserModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        @Html.LabelFor(x=>x.Email)
+        @Html.EditorFor(x=>x.Email)
+        @Html.ValidationMessageFor(x=>x.Email)
+        <br />
+        @Html.LabelFor(x=>x.Possword)
+        @Html.EditorFor(x=>x.Possword)
+        @Html.ValidationMessageFor(x=>x.Possword)
+        <input type="submit"/>
+    </fieldset>
+}

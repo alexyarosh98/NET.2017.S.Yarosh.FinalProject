@@ -82,7 +82,7 @@ namespace ConsoleTesting
                 Title = "task1",
                 Price = 1M,
                 Category = "c#",
-                Status = Status.awating,
+                Status = Status.Awating,
                 Description = "task1",
                 Deadline = new DateTime(2020,2,2),
                 Developer = userService.GetUser("nick3")
@@ -96,7 +96,7 @@ namespace ConsoleTesting
                 Title = "task2",
                 Price = 2M,
                 Category = "c#",
-                Status = Status.awating,
+                Status = Status.Awating,
                 Description = "task2",
                 Deadline = new DateTime(2020, 2, 2),
                 CreatorUser = userService.GetUser("nick3")
