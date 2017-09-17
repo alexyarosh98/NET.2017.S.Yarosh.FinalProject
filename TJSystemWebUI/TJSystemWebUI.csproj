@@ -205,11 +205,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Tasks\AllTasks.cshtml" />
     <Content Include="Views\Tasks\NewTask.cshtml" />
     <Content Include="Views\Tasks\TaskInfo.cshtml" />
     <Content Include="Views\Account\ViewAccount.cshtml" />
+    <Content Include="Views\Tasks\_RenderTaskList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

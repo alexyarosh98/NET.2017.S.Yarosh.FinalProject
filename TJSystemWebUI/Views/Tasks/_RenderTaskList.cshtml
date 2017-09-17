@@ -1,0 +1,21 @@
+﻿@model IEnumerable<BLLInterface.Models.TaskEntity>
+
+@foreach (var task in Model)
+{
+    <li>
+        <h3 align="left">@task.Title </h3>
+        <h5>
+            Category: @task.Category 
+        </h5>
+        Status: @task.Status
+        <div align="right"><font color="red"> @task.Price $</font>
+            <br/>    
+            @Html.ActionLink("Fullinfo","TaskInfo",task)
+           
+        @*@using (Html.BeginForm("TaskInfo","Tasks",task))
+             {
+                 <input type="submit" value="Full info"/>
+             }*@
+        </div>
+    </li>
+}

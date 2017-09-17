@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BLLInterface.Models.TaskEntity>
+﻿@model BLLInterface.Models.TaskEntity
 @{
     ViewBag.Title = "AllTasks";
 
@@ -14,42 +14,33 @@
 <h2 align="center">AllTasks</h2>
 
 
-<form action="NewTask"  >
+<form action="NewTask" >
     <input type="submit" class="button" value="Add new task"/>
 </form>
 
-
-<ul class="border" id="list">
-    @foreach (var task in Model)
-    {
-        <li>
-            <h3 align="left">@task.Title </h3>
-            <h5>
-               Category: @task.Category 
-            </h5>
-            Status: @task.Status
-            <div align="right"><font color="red"> @task.Price $</font>
-            <br/>    
-            @Html.ActionLink("Fullinfo","TaskInfo",task)
-            </div>
-        </li>
-    }
-</ul>
-<input type="submit"/>
-
+@using (Ajax.BeginForm(ajaxOptions))
+{
+    <input type="submit" value="Refresh" />
+    <ul class="border" id="list" >
+        @Html.Action("_RenderTaskList")
+    </ul>
+}
 @section scripts
 {
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
-    <script>
-        function ParseResponse(data) {
 
+    <script type="text/javascript">
+        function ParseResponse(data) {
+            
             var target = $("#list");
             target.empty();
 
             for (var i = 0; i < data.length; i++) {
-                target.append("<li><h3 align=\"left\">" +
+                target.append("<li>" +
+                    "<h3 align=\"left\">" +
                     data[i].Title +
-                    " </h3><h5>" +
+                    " </h3>" +
+                    "<h5>" +
                     "Category: " +
                     data[i].Category +
                     "</h5>" +
@@ -59,8 +50,10 @@
                     data[i].Price +
                     " $</font>" +
                     "<br/>" +
-                    "</div></li>"
-                )    
+                    @Html.ActionLink("htllo","NewTask").ToString()+
+                    "</div>" +
+                    "</li>"
+                )
             }
         }
     </script>

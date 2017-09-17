@@ -22,7 +22,13 @@ namespace TJSystemWebUI.Controllers
         public ActionResult AllTasks()
         {
             
-            return View(taskService.AllTasksShortInfo().Reverse());
+            return View();
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult _RenderTaskList()
+        {
+            return PartialView(taskService.AllTasksShortInfo().Reverse());
         }
         
         [HttpPost]
@@ -48,7 +54,8 @@ namespace TJSystemWebUI.Controllers
             }
             return View();
         }
-
+        
+        
         public ActionResult TaskInfo(TaskEntity task)
         {
             return View(taskService.GetTaskFullInfo(task));
