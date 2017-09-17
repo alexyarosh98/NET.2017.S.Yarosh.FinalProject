@@ -7,3 +7,5 @@
 
 @Model.Title
 @Model.Description
+@Model.CreatorUser.Nickname
+@Html.ActionLink("Developer", "ViewAccount","Account",Model.CreatorUser,null)

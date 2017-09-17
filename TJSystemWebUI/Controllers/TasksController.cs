@@ -11,10 +11,12 @@ namespace TJSystemWebUI.Controllers
     public class TasksController : Controller
     {
         private ITaskService taskService;
+        private IUserService userService;
 
-        public TasksController(ITaskService _taskService)
+        public TasksController(ITaskService _taskService,IUserService _userService)
         {
             taskService = _taskService;
+            userService = _userService;
         }
         // GET: Tasks
         public ActionResult AllTasks()
@@ -22,7 +24,12 @@ namespace TJSystemWebUI.Controllers
             
             return View(taskService.AllTasksShortInfo().Reverse());
         }
-
+        
+        [HttpPost]
+        public ActionResult AllTasksUpdateJSON()
+        {
+            return Json(taskService.AllTasksShortInfo().Reverse());
+        }
         public ActionResult NewTask()
         {
             return View();
@@ -34,7 +41,7 @@ namespace TJSystemWebUI.Controllers
             if (ModelState.IsValid)
             {
                 task.Status=Status.Awating;
-                task.CreatorUser=new UserEntity(){Email = "admin",Nickname = "admin",Role = Role.admin,Possword = "admin"};
+                task.CreatorUser = userService.GetUser("admin");
                 taskService.CreateTask(task);
 
                 return RedirectToAction("Index", "Home");
@@ -44,7 +51,7 @@ namespace TJSystemWebUI.Controllers
 
         public ActionResult TaskInfo(TaskEntity task)
         {
-            return View(task);
+            return View(taskService.GetTaskFullInfo(task));
         }
     }
 }

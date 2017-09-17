@@ -1,6 +1,14 @@
 ﻿@model IEnumerable<BLLInterface.Models.TaskEntity>
 @{
     ViewBag.Title = "AllTasks";
+
+    var ajaxOptions=new AjaxOptions()
+    {
+        UpdateTargetId = "list",
+        Url = Url.Action("AllTasksUpdateJSON"),
+        OnSuccess = "ParseResponse"
+    };
+
 }
 @Styles.Render("~/Content/TaskStyles.css")
 <h2 align="center">AllTasks</h2>
@@ -11,7 +19,7 @@
 </form>
 
 
-<ul class="border">
+<ul class="border" id="list">
     @foreach (var task in Model)
     {
         <li>
@@ -24,10 +32,36 @@
             <br/>    
             @Html.ActionLink("Fullinfo","TaskInfo",task)
             </div>
-
-            
         </li>
-  
     }
-   
 </ul>
+<input type="submit"/>
+
+@section scripts
+{
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    <script>
+        function ParseResponse(data) {
+
+            var target = $("#list");
+            target.empty();
+
+            for (var i = 0; i < data.length; i++) {
+                target.append("<li><h3 align=\"left\">" +
+                    data[i].Title +
+                    " </h3><h5>" +
+                    "Category: " +
+                    data[i].Category +
+                    "</h5>" +
+                    "Status: " +
+                    data[i].Status +
+                    "<div align=\"right\"><font color=\"red\">" +
+                    data[i].Price +
+                    " $</font>" +
+                    "<br/>" +
+                    "</div></li>"
+                )    
+            }
+        }
+    </script>
+}

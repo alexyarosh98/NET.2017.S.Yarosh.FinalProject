@@ -74,5 +74,12 @@ namespace TJSystemWebUI.Controllers
                 return View();
             }
         }
+        
+
+        public ActionResult ViewAccount(UserEntity user)
+        {
+            userService.GetAdditionalInfo(user);
+            return View(user);
+        }
     }
 }
