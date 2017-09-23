@@ -10,12 +10,13 @@
         Status: @task.Status
         <div align="right"><font color="red"> @task.Price $</font>
             <br/>    
-            @Html.ActionLink("Fullinfo","TaskInfo",task)
-           
-        @*@using (Html.BeginForm("TaskInfo","Tasks",task))
-             {
-                 <input type="submit" value="Full info"/>
-             }*@
+            @*@Html.ActionLink("Fullinfo","TaskInfo",task)*@
         </div>
+        @*@Html.ActionLink("Full","_RenderTaskFullInfo",task)*@
+        @Ajax.ActionLink("Full","_RenderTaskFullInfo",task,new AjaxOptions(){UpdateTargetId = $"{task.Id}",InsertionMode = InsertionMode.Replace})
+        @*<div class="spoiler-body" style="display:none">
+        </div>*@
+        <div id=@task.Id></div>
+    
     </li>
 }

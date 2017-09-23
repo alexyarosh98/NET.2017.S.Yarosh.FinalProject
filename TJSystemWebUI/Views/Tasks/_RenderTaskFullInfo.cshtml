@@ -1,0 +1,6 @@
+﻿@model BLLInterface.Models.TaskEntity
+
+Description: @Model.Description
+Deadline: @Model.Deadline
+Creator : @Html.ActionLink("Developer", "ViewAccount", "Account", new{ Email=Model.CreatorUser.Email},null)
+Creator email : @Model.CreatorUser.Email

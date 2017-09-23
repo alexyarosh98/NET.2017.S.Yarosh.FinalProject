@@ -40,44 +40,85 @@ namespace TJSystemWebUI.Controllers
         }
 
 
-        public ActionResult Login()
-        {            
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
+        {
+            var type = HttpContext.User.GetType();
+            var iden = HttpContext.User.Identity.GetType();
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
 
         [HttpPost]
-        public ActionResult Login(LogingUserModel model,string returnUrl)
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LogingUserModel viewModel, string returnUrl)
         {
-            UserEntity authUser;
-            try
+            if (ModelState.IsValid)
             {
-                 authUser = userService.GetUser(model.Email);
-
+                if (Membership.ValidateUser(viewModel.Email, viewModel.Password))
+                    //Проверяет учетные данные пользователя и управляет параметрами пользователей
+                {
+                    FormsAuthentication.SetAuthCookie(viewModel.Email, viewModel.RememberMe);
+                    //Управляет службами проверки подлинности с помощью форм для веб-приложений
+                    if (Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Incorrect login or password.");
+                }
             }
-            catch (Exception e)
-            {
-                ModelState.AddModelError("", "Incorrect possword or email");
-
-                return View();
-            }
-
-            if (authUser.Possword == model.Possword)
-            {
-                FormsAuthentication.SetAuthCookie(authUser.Email,false);
-                return Redirect(returnUrl ?? Url.Action("Index","Home"));
-            }
-            else
-            {
-                ModelState.AddModelError("","Incorrect possword or email");
-
-                return View();
-            }
+            return View(viewModel);
         }
-        
 
-        public ActionResult ViewAccount(UserEntity user)
+
+
+
+
+
+
+        //[HttpPost]
+        //public ActionResult Login(LogingUserModel model,string returnUrl)
+        //{
+        //    UserEntity authUser;
+        //    try
+        //    {
+        //         authUser = userService.GetUser(model.Email);
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        ModelState.AddModelError("", "Incorrect possword or email");
+
+        //        return View();
+        //    }
+
+        //    if (authUser.Possword == model.Possword)
+        //    {
+        //        FormsAuthentication.SetAuthCookie(authUser.Email,false);
+        //        return Redirect(returnUrl ?? Url.Action("Index","Home"));
+        //    }
+        //    else
+        //    {
+        //        ModelState.AddModelError("","Incorrect possword or email");
+
+        //        return View();
+        //    }
+        //}
+
+
+        public ActionResult ViewAccount(string Email)
         {
+            Debug.WriteLine("!!!!!!!!!" + Email.GetType());
+            UserEntity user = userService.GetUser(Email);
             userService.GetAdditionalInfo(user);
             return View(user);
         }

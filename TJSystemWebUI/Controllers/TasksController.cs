@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BLLInterface.Models;
 using BLLInterface.Services;
+using TJSystemWebUI.Infastructure;
 
 namespace TJSystemWebUI.Controllers
 {
@@ -30,11 +32,19 @@ namespace TJSystemWebUI.Controllers
         {
             return PartialView(taskService.AllTasksShortInfo().Reverse());
         }
+
+        //[AcceptAjax]
+        public ActionResult _RenderTaskFullInfo(TaskEntity taskEntity)
+        {
+            
+           taskEntity= taskService.GetTaskFullInfo(taskEntity);
+            return  PartialView("_RenderTaskFullInfo", taskEntity); //Json(taskEntity, JsonRequestBehavior.AllowGet); 
+        }
         
         [HttpPost]
-        public ActionResult AllTasksUpdateJSON()
+        public ActionResult AllTasksUpdate()
         {
-            return Json(taskService.AllTasksShortInfo().Reverse());
+            return PartialView("_RenderTaskList", taskService.AllTasksShortInfo().Reverse());
         }
         public ActionResult NewTask()
         {

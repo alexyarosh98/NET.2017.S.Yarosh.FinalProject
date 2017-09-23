@@ -150,14 +150,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="AuthProviders\TJSMembershipProvider.cs" />
+    <Compile Include="AuthProviders\TJSRoleProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infastructure\AcceptAjaxAttribute.cs" />
     <Compile Include="Infastructure\NinjectResolver.cs" />
-    <Compile Include="Infastructure\TJSAuthAttribute.cs" />
     <Compile Include="Models\LogingUserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -210,6 +212,7 @@
     <Content Include="Views\Tasks\TaskInfo.cshtml" />
     <Content Include="Views\Account\ViewAccount.cshtml" />
     <Content Include="Views\Tasks\_RenderTaskList.cshtml" />
+    <Content Include="Views\Tasks\_RenderTaskFullInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
