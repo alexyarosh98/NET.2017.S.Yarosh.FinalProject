@@ -213,6 +213,7 @@
     <Content Include="Views\Account\ViewAccount.cshtml" />
     <Content Include="Views\Tasks\_RenderTaskList.cshtml" />
     <Content Include="Views\Tasks\_RenderTaskFullInfo.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -34,9 +34,12 @@ namespace TJSystemWebUI.AuthProviders
             return false;
         }
 
-        public override string[] GetRolesForUser(string username)
+        public override string[] GetRolesForUser(string email)
         {
-            throw new NotImplementedException();
+            UserEntity user = UserRepository.GetUser(email);
+            if (user == null) return null;
+
+            return new[] {user.Role.ToString()};
         }
 
         public override void CreateRole(string roleName)

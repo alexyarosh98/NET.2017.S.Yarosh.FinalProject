@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Security;
@@ -18,33 +20,52 @@ namespace TJSystemWebUI.AuthProviders
         //public IRoleRepository RoleRepository
         //    => (IRoleRepository)System.Web.Mvc.DependencyResolver.Current.GetService(typeof(IRoleRepository));
 
-        public MembershipUser CreateUser(string email, string password,string nickname,string firstname=null,
-                string lastname=null,short? age=null,bool? gender=null)
-        {
-            MembershipUser membershipUser = GetUser(email, false);
 
-            if (membershipUser != null)
-            {
-                return null;
-            }
 
-            var user = new UserEntity()
-            {
-                Nickname = nickname,
-                Email = email,
-                Possword = Crypto.HashPassword(password),
-                Role = Role.user,
-                Firstname = firstname,
-                Lastname = lastname,
-                Age = age,
-                Gender = gender
+
+
+        //public MembershipUser CreateUser(string email, string password,string nickname,string firstname=null,
+        //        string lastname=null,short? age=null,bool? gender=null)
+        //{
+        //    MembershipUser membershipUser = GetUser(email, false);
+
+        //    if (membershipUser != null)
+        //    {
+        //        return null;
+        //    }
+
+        //    var user = new UserEntity()
+        //    {
+        //        Nickname = nickname,
+        //        Email = email,
+        //        Possword = Crypto.HashPassword(password),
+        //        Role = Role.user,
+        //        Firstname = firstname,
+        //        Lastname = lastname,
+        //        Age = age,
+        //        Gender = gender
                 
-            };
+        //    };
             
 
+        //    UserService.Register(user);
+        //    membershipUser = GetUser(email, false);
+        //    return membershipUser;
+        //}
+        public MembershipUser CreateUser(UserEntity user)
+        {
+            MembershipUser membershipUser;// = GetUser(user.Email, false);
+
+            //if (membershipUser != null)
+            //{
+            //    return null;
+            //}
+            user.Possword = Crypto.HashPassword(user.Possword);
             UserService.Register(user);
-            membershipUser = GetUser(email, false);
+            membershipUser = GetUser(user.Email, false);
             return membershipUser;
+
+
         }
 
         public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion,
@@ -81,8 +102,9 @@ namespace TJSystemWebUI.AuthProviders
 
         public override bool ValidateUser(string email, string password)
         {
-            var user = UserService.GetUser(email);
+            UserEntity user = UserService.GetUser(email);
 
+            Debug.WriteLine("!!!!!!!!!!!!" + user.Email + user.Nickname);
             if (user != null && Crypto.VerifyHashedPassword(user.Possword, password))
             {
                 return true;

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using BLLInterface.Models;
 using BLLInterface.Services;
+using TJSystemWebUI.AuthProviders;
 using TJSystemWebUI.Infastructure;
 using TJSystemWebUI.Models;
 
@@ -29,14 +30,24 @@ namespace TJSystemWebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(UserEntity newUser)
+        public ActionResult Create(UserEntity viewModel)
         {
             if (ModelState.IsValid)
             {
-                userService.Register(newUser);
-                return RedirectToAction("Index", "Home");
+                var membershipUser = ((TJSMembershipProvider)Membership.Provider)
+                    .CreateUser(viewModel);
+
+                if (membershipUser != null)
+                {
+                    FormsAuthentication.SetAuthCookie(viewModel.Email, false);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Error registration.");
+                }
             }
-            return View();
+            return View(viewModel);
         }
 
 
@@ -81,7 +92,12 @@ namespace TJSystemWebUI.Controllers
 
 
 
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
 
+            return RedirectToAction("Login", "Account");
+        }
 
 
 
@@ -114,7 +130,11 @@ namespace TJSystemWebUI.Controllers
         //    }
         //}
 
-
+        [ChildActionOnly]
+        public ActionResult LoginPartial()
+        {
+            return PartialView("_LoginPartial");
+        }
         public ActionResult ViewAccount(string Email)
         {
             Debug.WriteLine("!!!!!!!!!" + Email.GetType());

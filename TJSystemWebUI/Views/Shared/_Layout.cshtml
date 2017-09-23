@@ -26,6 +26,14 @@
                 </ul>
             </div>
         </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "About", "Home")</li>
+                @Html.Partial("_LoginPartial")
+            </ul>
+        </div>
+    </div>
+        </div>
     </div>
 <div class="container body-content">
     @RenderBody()
