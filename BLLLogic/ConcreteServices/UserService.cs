@@ -50,7 +50,7 @@ namespace BLLLogic.ConcreteServices
 
         public UserEntity GetUser(string email)
         {
-            return userRepository.GetByEmail(email).ToBllUser();
+            return userRepository.GetByEmail(email)==null?null:userRepository.GetByEmail(email).ToBllUser();
         }
     }
 }

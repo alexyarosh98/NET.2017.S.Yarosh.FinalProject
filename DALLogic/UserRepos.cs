@@ -69,8 +69,8 @@ namespace DALLogic
         {
            
             User expectedUser=context.Set<User>().FirstOrDefault(user => user.Email == email);
-            if(ReferenceEquals(expectedUser,null)) throw new InvalidOperationException();
-
+            if (ReferenceEquals(expectedUser, null)) return null;// throw new InvalidOperationException();
+           ///// Запись в лог на уровень выше ы
             return new DALUser()
             {
                 Id = expectedUser.UserId,
@@ -96,10 +96,10 @@ namespace DALLogic
                 Email = expectedUser.Email,
                 Role = expectedUser.Role,
                 Rating = expectedUser.Rating,
-                Firstname = expectedUser.UserInfo.Firstname,
-                Lastname = expectedUser.UserInfo.Lastname,
-                Age = expectedUser.UserInfo.Age,
-                Gender = expectedUser.UserInfo.Gender,
+                Firstname =expectedUser.UserInfo==null?null: expectedUser.UserInfo.Firstname,
+                Lastname = expectedUser.UserInfo == null ? null : expectedUser.UserInfo.Lastname,
+                Age = expectedUser.UserInfo == null ? null : expectedUser.UserInfo.Age,
+                Gender = expectedUser.UserInfo == null ? null : expectedUser.UserInfo.Gender,
                 //CreatedTasks = new List<DALTask>(expectedUser.CreatedTasks.Select(i=>new DALTask()
                 //{
                 //    Title = i.Task.Title,

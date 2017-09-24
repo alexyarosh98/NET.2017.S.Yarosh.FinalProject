@@ -2,5 +2,16 @@
 
 Description: @Model.Description
 Deadline: @Model.Deadline
-Creator : @Html.ActionLink("Developer", "ViewAccount", "Account", new{ Email=Model.CreatorUser.Email},null)
+Creator : @Html.ActionLink("Creator", "ViewAccount", "Account", new{ Email=Model.CreatorUser.Email},null)
 Creator email : @Model.CreatorUser.Email
+<div id=@string.Format("taskId{0}developer",Model.Id)>
+Developer: @if (Model.Developer == null)
+           {
+               @Ajax.ActionLink("become","_BecomeADeveloper",Model,new AjaxOptions()
+               { UpdateTargetId =$"taskId{Model.Id}developer",InsertionMode = InsertionMode.Replace})
+           }
+           else
+           {
+               @Html.ActionLink("Developer","ViewAccount","Account",new{Email=Model.Developer.Email},null);
+           }
+    </div>

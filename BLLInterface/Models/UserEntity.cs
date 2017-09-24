@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace BLLInterface.Models
 {
@@ -18,11 +19,12 @@ namespace BLLInterface.Models
         public string  Nickname { get; set; }
         [Required(ErrorMessage = "Possword is requiered")]
         [MinLength(6,ErrorMessage = "Possword must consist of 6 or more symbols")]
-        [Compare("PosswordConfirm",ErrorMessage = "Posswords are not the same")]
+        [System.ComponentModel.DataAnnotations.Compare("PosswordConfirm",ErrorMessage = "Posswords are not the same")]
         public string Possword { get; set; }
         public string PosswordConfirm { get; set; }
         [Required(ErrorMessage = "Email is requiered")]
         [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",ErrorMessage = "Invalid email")]
+        [Remote("CheckUsersEmail","Account",ErrorMessage = "This email is already exists")]
         public string Email { get; set; }
         public Role Role { get; set; }
         public double Rating { get; set; }

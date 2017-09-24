@@ -10,6 +10,7 @@ using TJSystemWebUI.Infastructure;
 
 namespace TJSystemWebUI.Controllers
 {
+    [Authorize]
     public class TasksController : Controller
     {
         private ITaskService taskService;
@@ -46,29 +47,36 @@ namespace TJSystemWebUI.Controllers
         {
             return PartialView("_RenderTaskList", taskService.AllTasksShortInfo().Reverse());
         }
+        [Authorize]
         public ActionResult NewTask()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult NewTask(TaskEntity task)
+        public ActionResult NewTask(TaskEntity task,string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 task.Status=Status.Awating;
-                task.CreatorUser = userService.GetUser("admin");
+                task.CreatorUser = userService.GetUser(User.Identity.Name);
                 taskService.CreateTask(task);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToRoute(returnUrl);
             }
             return View();
         }
         
         
-        public ActionResult TaskInfo(TaskEntity task)
+        //public ActionResult TaskInfo(TaskEntity task)
+        //{
+        //    return View(taskService.GetTaskFullInfo(task));
+        //}
+
+        public ActionResult _BecomeADeveloper(TaskEntity task)
         {
-            return View(taskService.GetTaskFullInfo(task));
+            task.Developer = userService.GetUser(User.Identity.Name);
+            return PartialView(task.Developer);
         }
     }
 }

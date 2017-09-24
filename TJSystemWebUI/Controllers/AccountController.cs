@@ -32,6 +32,10 @@ namespace TJSystemWebUI.Controllers
         [HttpPost]
         public ActionResult Create(UserEntity viewModel)
         {
+            if (userService.GetUser(viewModel.Email) != null)
+            {
+                ModelState.AddModelError("","This email is already registered");
+            }
             if (ModelState.IsValid)
             {
                 var membershipUser = ((TJSMembershipProvider)Membership.Provider)
@@ -137,10 +141,17 @@ namespace TJSystemWebUI.Controllers
         }
         public ActionResult ViewAccount(string Email)
         {
-            Debug.WriteLine("!!!!!!!!!" + Email.GetType());
             UserEntity user = userService.GetUser(Email);
             userService.GetAdditionalInfo(user);
             return View(user);
+        }
+
+
+        public ActionResult CheckUsersEmail(string email)
+        {
+            UserEntity user = userService.GetUser(email);
+           return Json(user==null, JsonRequestBehavior.AllowGet);
+           
         }
     }
 }
