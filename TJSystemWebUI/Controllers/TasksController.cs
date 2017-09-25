@@ -22,6 +22,7 @@ namespace TJSystemWebUI.Controllers
             userService = _userService;
         }
         // GET: Tasks
+        [AllowAnonymous]
         public ActionResult AllTasks()
         {
             
@@ -34,7 +35,8 @@ namespace TJSystemWebUI.Controllers
             return PartialView(taskService.AllTasksShortInfo().Reverse());
         }
 
-        //[AcceptAjax]
+       // [AjaxRequestOnly]
+        [AllowAnonymous]
         public ActionResult _RenderTaskFullInfo(TaskEntity taskEntity)
         {
             
@@ -43,6 +45,7 @@ namespace TJSystemWebUI.Controllers
         }
         
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult AllTasksUpdate()
         {
             return PartialView("_RenderTaskList", taskService.AllTasksShortInfo().Reverse());
@@ -72,11 +75,23 @@ namespace TJSystemWebUI.Controllers
         //{
         //    return View(taskService.GetTaskFullInfo(task));
         //}
-
+        [AjaxRequestOnly]
         public ActionResult _BecomeADeveloper(TaskEntity task)
         {
             task.Developer = userService.GetUser(User.Identity.Name);
+            taskService.UpdateTask(task);
             return PartialView(task.Developer);
+        }
+        [AjaxRequestOnly]
+        public void _DeleteTask(TaskEntity taskToDelete)
+        {
+            taskService.DeleteTask(taskToDelete);
+            
+        }
+
+        public ActionResult _RenderTaskToUpdate(TaskEntity taskToUpdate)
+        {
+            return PartialView(taskToUpdate);
         }
     }
 }

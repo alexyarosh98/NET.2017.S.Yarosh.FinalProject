@@ -146,7 +146,7 @@ namespace TJSystemWebUI.Controllers
             return View(user);
         }
 
-
+        [AjaxRequestOnly]
         public ActionResult CheckUsersEmail(string email)
         {
             UserEntity user = userService.GetUser(email);

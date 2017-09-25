@@ -117,6 +117,7 @@ namespace DALLogic
             context.Entry(task).CurrentValues.SetValues(taskToUp);
 
             TaskInfo taskInfo = task.TaskInfo;
+            taskInfo.Developer = context.Set<User>().FirstOrDefault(u => u.UserId == taskToUp.Developer.Id);
             context.Entry(taskInfo).CurrentValues.SetValues(taskToUp);
 
             context.SaveChanges();

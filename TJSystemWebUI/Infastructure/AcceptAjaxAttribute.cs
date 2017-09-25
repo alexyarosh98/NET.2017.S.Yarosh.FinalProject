@@ -8,7 +8,7 @@ using System.Web.Mvc;
 namespace TJSystemWebUI.Infastructure
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class AcceptAjaxAttribute : ActionMethodSelectorAttribute
+    public class AjaxRequestOnlyAttribute : ActionMethodSelectorAttribute
     {
         public override bool IsValidForRequest(ControllerContext controllerContext, MethodInfo methodInfo)
         {

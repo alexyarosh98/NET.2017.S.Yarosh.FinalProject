@@ -1,17 +1,53 @@
 ﻿@model BLLInterface.Models.TaskEntity
+    @{
+        var ajaxOptions = new AjaxOptions()
+        {
+            UpdateTargetId = "list",
+           // Url = Url.Action("_DeleteTask",Model),
+            OnSuccess = "OnDeleteClickRefreshList"
 
+        };
+    }
+        
+    
+@{
+    if (User.Identity.Name.Equals(Model.Developer==null?null:Model.Developer.Email))
+    {
+        <input type="range"/>
+    }
+}
+
+@{
+    if (User.Identity.Name.Equals(Model.CreatorUser.Email) || User.IsInRole("admin"))
+    {
+        @*using (Ajax.BeginForm(ajaxOptions))
+            {
+                <input type="submit" value="delete"/>
+            }*@
+        @Ajax.ActionLink("Delete","_DeleteTask",Model,ajaxOptions)
+    }
+}
+@{
+    if (User.Identity.Name==Model.CreatorUser.Email )
+    {
+        @Ajax.ActionLink("update", "_RenderTaskToUpdate", Model, new AjaxOptions {UpdateTargetId = $"{Model.Id}", InsertionMode = InsertionMode.Replace});
+    }
+
+}
 Description: @Model.Description
 Deadline: @Model.Deadline
 Creator : @Html.ActionLink("Creator", "ViewAccount", "Account", new{ Email=Model.CreatorUser.Email},null)
 Creator email : @Model.CreatorUser.Email
 <div id=@string.Format("taskId{0}developer",Model.Id)>
-Developer: @if (Model.Developer == null)
-           {
-               @Ajax.ActionLink("become","_BecomeADeveloper",Model,new AjaxOptions()
-               { UpdateTargetId =$"taskId{Model.Id}developer",InsertionMode = InsertionMode.Replace})
-           }
-           else
-           {
-               @Html.ActionLink("Developer","ViewAccount","Account",new{Email=Model.Developer.Email},null);
-           }
-    </div>
+    Developer: @if (Model.Developer == null)
+               {
+                   @Ajax.ActionLink("become","_BecomeADeveloper",Model,new AjaxOptions()
+                   { UpdateTargetId =$"taskId{Model.Id}developer",InsertionMode = InsertionMode.Replace})
+               }
+               else
+               {
+                   @Html.ActionLink("Developer","ViewAccount","Account",new{Email=Model.Developer.Email},null);
+               }
+</div>
+
+

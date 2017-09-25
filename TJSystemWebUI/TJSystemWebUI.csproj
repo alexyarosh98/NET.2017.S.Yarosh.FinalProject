@@ -214,6 +214,7 @@
     <Content Include="Views\Tasks\_RenderTaskFullInfo.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Tasks\_BecomeADeveloper.cshtml" />
+    <Content Include="Views\Tasks\_RenderTaskToUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,7 +6,7 @@
     {
         UpdateTargetId = "list",
         Url = Url.Action("AllTasksUpdate"),
-        OnSuccess = "ParseResponse"
+        //OnSuccess = "ParseResponse"
     };
 
 }
@@ -20,7 +20,7 @@
 <div id="wrapper">
     @using (Ajax.BeginForm(ajaxOptions))
     {
-        <input type="submit" value="Refresh" />
+        <input type="submit" value="Refresh" id="refreshButton" />
         <ul class="border" id="list" >
             @Html.Action("_RenderTaskList")
         </ul>
@@ -32,7 +32,11 @@
 {
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
     @Scripts.Render("~/bundles/jquery");
-   
+    <script type="text/javascript">
+        $(document).ready(function OnDeleteClickRefreshList() {
+            document.getElementById("refreshButton").click();
+        });
+    </script>
     
     
     @*<script type="text/javascript">    
