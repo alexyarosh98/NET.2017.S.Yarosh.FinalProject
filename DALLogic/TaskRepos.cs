@@ -114,11 +114,19 @@ namespace DALLogic
         public void Update(DALTask taskToUp)
         {
             Task task = context.Set<Task>().Find(taskToUp.Id);
-            context.Entry(task).CurrentValues.SetValues(taskToUp);
-
+            //context.Entry(task).CurrentValues.SetValues(taskToUp);
+            task.Title = taskToUp.Title;
+            task.Category = context.Set<Category>().First(c=>c.Name==taskToUp.Category);
+            task.Price = taskToUp.Price;
+            task.Status = taskToUp.Status;
+            
             TaskInfo taskInfo = task.TaskInfo;
-            taskInfo.Developer = context.Set<User>().FirstOrDefault(u => u.UserId == taskToUp.Developer.Id);
-            context.Entry(taskInfo).CurrentValues.SetValues(taskToUp);
+            taskInfo.Developer = taskToUp.Developer==null?null:context.Set<User>().FirstOrDefault(u => u.UserId == taskToUp.Developer.Id);
+            //context.Entry(taskInfo).CurrentValues.SetValues(taskToUp);
+            taskInfo.Deadline = taskToUp.Deadline;
+            taskInfo.Description = taskToUp.Description;
+            taskInfo.Implementation = taskToUp.Implementation;
+            
 
             context.SaveChanges();
         }

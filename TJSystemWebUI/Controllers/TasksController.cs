@@ -30,6 +30,7 @@ namespace TJSystemWebUI.Controllers
         }
 
         [ChildActionOnly]
+        [AllowAnonymous]
         public PartialViewResult _RenderTaskList()
         {
             return PartialView(taskService.AllTasksShortInfo().Reverse());
@@ -59,13 +60,18 @@ namespace TJSystemWebUI.Controllers
         [HttpPost]
         public ActionResult NewTask(TaskEntity task,string returnUrl)
         {
+            if (task.Deadline <= DateTime.Now)
+            {
+                ModelState.AddModelError("","Enter date in the future");
+            }
             if (ModelState.IsValid)
             {
                 task.Status=Status.Awating;
                 task.CreatorUser = userService.GetUser(User.Identity.Name);
                 taskService.CreateTask(task);
 
-                return RedirectToRoute(returnUrl);
+                if (Url.IsLocalUrl(returnUrl)) return RedirectToRoute(returnUrl);
+                return RedirectToAction("AllTasks");
             }
             return View();
         }
@@ -79,6 +85,7 @@ namespace TJSystemWebUI.Controllers
         public ActionResult _BecomeADeveloper(TaskEntity task)
         {
             task.Developer = userService.GetUser(User.Identity.Name);
+            task.Status=Status.Developing;
             taskService.UpdateTask(task);
             return PartialView(task.Developer);
         }
@@ -92,6 +99,13 @@ namespace TJSystemWebUI.Controllers
         public ActionResult _RenderTaskToUpdate(TaskEntity taskToUpdate)
         {
             return PartialView(taskToUpdate);
+        }
+        [HttpPost]
+        public ActionResult _UpdateTask(TaskEntity updatedTask)
+        {
+            taskService.UpdateTask(updatedTask);
+
+            return PartialView("_RenderTaskFullInfo", updatedTask);
         }
     }
 }
