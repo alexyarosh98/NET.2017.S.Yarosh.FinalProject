@@ -16,7 +16,7 @@ namespace BLLLogic.Mappers
             {
                 Id = user.Id,
                 Nickname = user.Nickname,
-                Possword = user.Possword,
+                Password = user.Password,
                 Email = user.Email,
                 Rating = (ushort)user.Rating,
                 Role = (Role)user.Role,
@@ -35,7 +35,7 @@ namespace BLLLogic.Mappers
             {
                 Id = user.Id,
                 Nickname = user.Nickname,
-                Possword = user.Possword,
+                Password = user.Password,
                 Email = user.Email,
                 Role = (byte)user.Role,
                 Rating = user.Rating,

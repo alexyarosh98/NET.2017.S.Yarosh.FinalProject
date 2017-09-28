@@ -3,17 +3,15 @@
 @{
     var ajaxOptions=new AjaxOptions()
     {
-        //Url = Url.Action("_UpdateTask"),
+        Url = Url.Action("_UpdateTask"),
         UpdateTargetId = Model.Id.ToString(),
         InsertionMode = InsertionMode.Replace,
         HttpMethod = "POST"
         
-
-        
     };
 }
 <div id="innerWrapper">
-    @using (Ajax.BeginForm("_UpdateTask",ajaxOptions))
+    @using (Ajax.BeginForm(ajaxOptions))
     {
         
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })

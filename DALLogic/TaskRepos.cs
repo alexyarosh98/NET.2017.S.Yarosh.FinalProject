@@ -150,7 +150,7 @@ namespace DALLogic
                 {
                     Id = task.TaskInfo.CreatorUser.UserId,
                     Nickname = task.TaskInfo.CreatorUser.Nickname,
-                    Possword = task.TaskInfo.CreatorUser.Possword,
+                    Password = task.TaskInfo.CreatorUser.Password,
                     Email = task.TaskInfo.CreatorUser.Email,
                     Role = task.TaskInfo.CreatorUser.Role,
                     Rating = task.TaskInfo.CreatorUser.Rating
@@ -159,7 +159,7 @@ namespace DALLogic
                 {
                     Id = task.TaskInfo.Developer.UserId,
                     Nickname = task.TaskInfo.Developer.Nickname,
-                    Possword = task.TaskInfo.Developer.Possword,
+                    Password = task.TaskInfo.Developer.Password,
                     Email = task.TaskInfo.Developer.Email,
                     Role = task.TaskInfo.Developer.Role,
                     Rating = task.TaskInfo.Developer.Rating

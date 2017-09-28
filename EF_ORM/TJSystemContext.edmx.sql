@@ -61,7 +61,7 @@ GO
 CREATE TABLE [dbo].[Users] (
     [UserId] int IDENTITY(1,1) NOT NULL,
     [Nickname] nvarchar(max)  NOT NULL,
-    [Possword] nvarchar(max)  NOT NULL,
+    [Password] nvarchar(max)  NOT NULL,
     [Email] nvarchar(max)  NOT NULL,
     [Role] tinyint  NOT NULL,
     [Rating] float  NOT NULL

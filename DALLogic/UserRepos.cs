@@ -27,7 +27,7 @@ namespace DALLogic
         //        .Select(user => new DALUser()
         //        {
         //            Nickname = user.Nickname,
-        //            Possword = user.Possword,
+        //            Password = user.Password,
         //            Email = user.Email,
         //            Role = user.Role,
         //            Rating = user.Rating,
@@ -58,7 +58,7 @@ namespace DALLogic
                 {
                     Id = user.UserId,
                     Nickname = user.Nickname,
-                    Possword = user.Possword,
+                    Password = user.Password,
                     Email = user.Email,
                     Role = user.Role,
                     Rating = user.Rating
@@ -75,7 +75,7 @@ namespace DALLogic
             {
                 Id = expectedUser.UserId,
                 Nickname = expectedUser.Nickname,
-                Possword = expectedUser.Possword,
+                Password = expectedUser.Password,
                 Email = expectedUser.Email,
                 Role = expectedUser.Role,
                 Rating = expectedUser.Rating
@@ -92,7 +92,7 @@ namespace DALLogic
             {
                 Id = expectedUser.UserId,
                 Nickname = expectedUser.Nickname,
-                Possword = expectedUser.Possword,
+                Password = expectedUser.Password,
                 Email = expectedUser.Email,
                 Role = expectedUser.Role,
                 Rating = expectedUser.Rating,
@@ -137,7 +137,7 @@ namespace DALLogic
             User newUser=new User()
             {
                 Nickname = user.Nickname,
-                Possword = user.Possword,
+                Password = user.Password,
                 Email = user.Email,
                 Role = (byte)user.Role,
                 Rating = user.Rating,

@@ -17,13 +17,13 @@ namespace BLLInterface.Models
         [MaxLength(15,ErrorMessage = "Nickname's length must be from 3 to 15 symbols")]
         [MinLength(3,ErrorMessage = "Nickname's length must be from 3 to 15 symbols")]
         public string  Nickname { get; set; }
-        [Required(ErrorMessage = "Possword is requiered")]
+        [Required(ErrorMessage = "Password is requiered")]
         [DataType(DataType.Password)]
-        [MinLength(6,ErrorMessage = "Possword must consist of 6 or more symbols")]
-        [System.ComponentModel.DataAnnotations.Compare("PosswordConfirm",ErrorMessage = "Posswords are not the same")]
-        public string Possword { get; set; }
+        [MinLength(6,ErrorMessage = "Password must consist of 6 or more symbols")]
+        [System.ComponentModel.DataAnnotations.Compare("PasswordConfirm",ErrorMessage = "Passwords are not the same")]
+        public string Password { get; set; }
         [DataType(DataType.Password)]
-        public string PosswordConfirm { get; set; }
+        public string PasswordConfirm { get; set; }
         [Required(ErrorMessage = "Email is requiered")]
         [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",ErrorMessage = "Invalid email")]
         [Remote("CheckUsersEmail","Account",ErrorMessage = "This email is already exists")]

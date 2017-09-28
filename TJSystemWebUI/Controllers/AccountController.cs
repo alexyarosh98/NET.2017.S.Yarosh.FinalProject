@@ -114,19 +114,19 @@ namespace TJSystemWebUI.Controllers
         //    }
         //    catch (Exception e)
         //    {
-        //        ModelState.AddModelError("", "Incorrect possword or email");
+        //        ModelState.AddModelError("", "Incorrect Password or email");
 
         //        return View();
         //    }
 
-        //    if (authUser.Possword == model.Possword)
+        //    if (authUser.Password == model.Password)
         //    {
         //        FormsAuthentication.SetAuthCookie(authUser.Email,false);
         //        return Redirect(returnUrl ?? Url.Action("Index","Home"));
         //    }
         //    else
         //    {
-        //        ModelState.AddModelError("","Incorrect possword or email");
+        //        ModelState.AddModelError("","Incorrect Password or email");
 
         //        return View();
         //    }

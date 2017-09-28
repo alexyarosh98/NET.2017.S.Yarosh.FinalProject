@@ -38,7 +38,7 @@
     </Key>
     <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nickname" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Possword" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Role" Type="tinyint" Nullable="false" />
     <Property Name="Rating" Type="float" Nullable="false" DefaultValue="0" />
@@ -180,7 +180,7 @@
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nickname" Type="String" Nullable="false" />
-          <Property Name="Possword" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
           <Property Name="Email" Type="String" Nullable="false" />
           <Property Name="Role" Type="Byte" Nullable="false" />
           <Property Name="Rating" Type="Double" Nullable="false" DefaultValue="0.0" />
@@ -279,7 +279,7 @@
         <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Nickname" ColumnName="Nickname" />
-          <ScalarProperty Name="Possword" ColumnName="Possword" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Role" ColumnName="Role" />
           <ScalarProperty Name="Rating" ColumnName="Rating" />

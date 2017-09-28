@@ -38,7 +38,7 @@ namespace TJSystemWebUI.AuthProviders
         //    {
         //        Nickname = nickname,
         //        Email = email,
-        //        Possword = Crypto.HashPassword(password),
+        //        Password = Crypto.HashPassword(password),
         //        Role = Role.user,
         //        Firstname = firstname,
         //        Lastname = lastname,
@@ -60,7 +60,7 @@ namespace TJSystemWebUI.AuthProviders
             {
                 return null;
             }
-            user.Possword = Crypto.HashPassword(user.Possword);
+            user.Password = Crypto.HashPassword(user.Password);
             UserService.Register(user);
             membershipUser = GetUser(user.Email, false);
             return membershipUser;
@@ -105,7 +105,7 @@ namespace TJSystemWebUI.AuthProviders
             UserEntity user = UserService.GetUser(email);
 
             Debug.WriteLine("!!!!!!!!!!!!" + user.Email + user.Nickname);
-            if (user != null && Crypto.VerifyHashedPassword(user.Possword, password))
+            if (user != null && Crypto.VerifyHashedPassword(user.Password, password))
             {
                 return true;
             }

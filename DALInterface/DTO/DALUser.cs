@@ -10,7 +10,7 @@ namespace DALInterface.DTO
     {
         public int Id { get; set; }
         public string Nickname { get; set; }
-        public string Possword { get; set; }
+        public string Password { get; set; }
         public string Email { get; set; }
         public byte Role { get; set; }
         public double Rating { get; set; }

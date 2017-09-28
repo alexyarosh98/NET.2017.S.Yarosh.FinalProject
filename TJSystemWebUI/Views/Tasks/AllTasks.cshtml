@@ -15,9 +15,14 @@
 <h2 align="center">AllTasks</h2>
 
 
-<form action="NewTask" >
+@*<form action="NewTask" >
     <input type="submit" class="button" value="Add new task"/>
-</form>
+</form>*@
+@using (Html.BeginForm("NewTask", "Tasks"))
+{
+    <input type="submit" class="button" value="Add new task"/>
+    
+}
 <div id="wrapper">
     @using (Ajax.BeginForm(ajaxOptions))
     {
