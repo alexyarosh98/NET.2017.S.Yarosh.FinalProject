@@ -1,4 +1,5 @@
-﻿@model BLLInterface.Models.TaskEntity
+﻿@using BLLInterface.Models
+@model BLLInterface.Models.TaskEntity
 @{
     ViewBag.Title = "NewTask";
 }
@@ -12,11 +13,12 @@
     @Html.ValidationMessageFor(x=>x.Title)
     <br/>
     @Html.LabelFor(x=>x.Category)
-    @Html.DropDownList("Category",new SelectList(new []
+    @*@Html.DropDownList("Category",new SelectList(new []
     {
         new {Id="c#",Name="C#"},
        new {Id="java",Name="Java"}
-    },"Id","Name"),"Select category")
+    },"Id","Name"),"Select category")*@
+    @Html.DropDownList("Category",new SelectList(ViewBag.Categories),"Select")
     @Html.ValidationMessageFor(x => x.Category)
     <br />
     @Html.LabelFor(x => x.Price)

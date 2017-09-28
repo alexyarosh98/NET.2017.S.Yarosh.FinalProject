@@ -73,9 +73,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CategoryEntity.cs" />
     <Compile Include="Models\TaskEntity.cs" />
     <Compile Include="Models\UserEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ICategoryService.cs" />
     <Compile Include="Services\ITaskService.cs" />
     <Compile Include="Services\IUserService.cs" />
   </ItemGroup>

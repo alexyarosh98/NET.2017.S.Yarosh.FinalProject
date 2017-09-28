@@ -20,8 +20,8 @@ namespace BLLInterface.Models
         [Required(ErrorMessage = "Password is requiered")]
         [DataType(DataType.Password)]
         [MinLength(6,ErrorMessage = "Password must consist of 6 or more symbols")]
-        [System.ComponentModel.DataAnnotations.Compare("PasswordConfirm",ErrorMessage = "Passwords are not the same")]
         public string Password { get; set; }
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Passwords are not the same")]
         [DataType(DataType.Password)]
         public string PasswordConfirm { get; set; }
         [Required(ErrorMessage = "Email is requiered")]

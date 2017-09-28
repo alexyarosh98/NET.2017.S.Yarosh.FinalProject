@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConcreteServices\CategoryService.cs" />
     <Compile Include="ConcreteServices\TaskService.cs" />
     <Compile Include="ConcreteServices\UserService.cs" />
+    <Compile Include="Mappers\CategoryEntityMapper.cs" />
     <Compile Include="Mappers\TaskEntityMapper.cs" />
     <Compile Include="Mappers\UserEntityMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

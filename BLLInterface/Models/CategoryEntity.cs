@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DALInterface.DTO
+namespace BLLInterface.Models
 {
-    public class DALCategory:IDALEntity
+    public class CategoryEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

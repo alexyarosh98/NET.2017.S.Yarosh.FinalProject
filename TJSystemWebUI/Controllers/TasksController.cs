@@ -15,11 +15,13 @@ namespace TJSystemWebUI.Controllers
     {
         private ITaskService taskService;
         private IUserService userService;
+        private ICategoryService categoryService;
 
-        public TasksController(ITaskService _taskService,IUserService _userService)
+        public TasksController(ITaskService _taskService,IUserService _userService,ICategoryService _categoryService)
         {
             taskService = _taskService;
             userService = _userService;
+            categoryService = _categoryService;
         }
         // GET: Tasks
         [AllowAnonymous]
@@ -54,6 +56,7 @@ namespace TJSystemWebUI.Controllers
         [Authorize]
         public ActionResult NewTask()
         {
+            ViewBag.Categories = categoryService.GetAll().Select(c=>c.Name);
             return View();
         }
 

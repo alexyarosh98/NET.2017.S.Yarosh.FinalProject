@@ -20,8 +20,10 @@ namespace DependencyResolver
             kernel.Bind<DbContext>().To<TJSystemContextContainer>();
             kernel.Bind<IUserRepository>().To<UserRepos>();
             kernel.Bind<ITaskRepository>().To<TaskRepos>();
+            kernel.Bind<ICategoryRepository>().To<CategoryRepos>();
             kernel.Bind<IUserService>().To<UserService>();
             kernel.Bind<ITaskService>().To<TaskService>();
+            kernel.Bind<ICategoryService>().To<CategoryService>();
         }
     }
 }

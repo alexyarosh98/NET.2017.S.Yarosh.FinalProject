@@ -46,6 +46,7 @@
     <Compile Include="DTO\DALUser.cs" />
     <Compile Include="DTO\IDALEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repos\ICategoryRepository.cs" />
     <Compile Include="Repos\IRepository.cs" />
     <Compile Include="Repos\ITaskRepository.cs" />
     <Compile Include="Repos\IUserRepository.cs" />
