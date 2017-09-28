@@ -7,6 +7,7 @@
         UpdateTargetId = "list",
         Url = Url.Action("AllTasksUpdate"),
         //OnSuccess = "ParseResponse"
+        
     };
 
 }
@@ -27,16 +28,11 @@
     }
 </div>
 
-<div id="content"></div>
 @section scripts
 {
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
     @Scripts.Render("~/bundles/jquery");
-    @*<script type="text/javascript">
-        $(document).ready(function OnDeleteClickRefreshList() {
-            document.getElementById("refreshButton").click();
-        });
-    </script>*@
+   
     
     
     @*<script type="text/javascript">    

@@ -54,12 +54,12 @@ namespace TJSystemWebUI.AuthProviders
         //}
         public MembershipUser CreateUser(UserEntity user)
         {
-            MembershipUser membershipUser;// = GetUser(user.Email, false);
+            MembershipUser membershipUser = GetUser(user.Email, false);
 
-            //if (membershipUser != null)
-            //{
-            //    return null;
-            //}
+            if (membershipUser != null)
+            {
+                return null;
+            }
             user.Possword = Crypto.HashPassword(user.Possword);
             UserService.Register(user);
             membershipUser = GetUser(user.Email, false);

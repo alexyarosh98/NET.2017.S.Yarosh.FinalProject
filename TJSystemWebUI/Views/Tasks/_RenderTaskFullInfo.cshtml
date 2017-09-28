@@ -4,7 +4,7 @@
         {
             UpdateTargetId = "list",
            // Url = Url.Action("_DeleteTask",Model),
-            OnSuccess = "OnDeleteClickRefreshList"
+            OnComplete = "OnDeleteClickRefreshList"
 
         };
     }
@@ -51,3 +51,13 @@ Creator email : @Model.CreatorUser.Email
 </div>
 
 
+<script type="text/javascript">
+    //$(document).ready(function OnDeleteClickRefreshList() {
+    //    document.getElementById("refreshButton").submit();
+    //});
+
+
+    function OnDeleteClickRefreshList() {
+        document.getElementById("form0").submit();
+    }
+</script>

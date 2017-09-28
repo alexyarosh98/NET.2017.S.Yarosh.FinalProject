@@ -11,7 +11,7 @@
                 <li>@Html.ActionLink("Users edit", "Index", "Home")</li>
             }
             <li>
-                @Html.ActionLink("Hello, " + User.Identity.Name + "!", "Index", "Home", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Hello, " + User.Identity.Name + "!", "ViewAccount", "Account", routeValues: new { Email = User.Identity.Name }, htmlAttributes: new { title = "Manage" })
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>

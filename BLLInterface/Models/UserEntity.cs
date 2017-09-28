@@ -18,9 +18,11 @@ namespace BLLInterface.Models
         [MinLength(3,ErrorMessage = "Nickname's length must be from 3 to 15 symbols")]
         public string  Nickname { get; set; }
         [Required(ErrorMessage = "Possword is requiered")]
+        [DataType(DataType.Password)]
         [MinLength(6,ErrorMessage = "Possword must consist of 6 or more symbols")]
         [System.ComponentModel.DataAnnotations.Compare("PosswordConfirm",ErrorMessage = "Posswords are not the same")]
         public string Possword { get; set; }
+        [DataType(DataType.Password)]
         public string PosswordConfirm { get; set; }
         [Required(ErrorMessage = "Email is requiered")]
         [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",ErrorMessage = "Invalid email")]
