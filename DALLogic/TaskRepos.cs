@@ -169,6 +169,23 @@ namespace DALLogic
             };
         }
 
+        public IEnumerable<DALTask> GetUserTasks(string email)
+        {
+            return context.Set<Task>()
+                .Include("Categories")
+                .Include("TaskInfoes")
+                .Include("Users")
+                .Where(task => task.TaskInfo.Developer.Email == email)
+                .Select(task => new DALTask()
+                {
+                    Id = task.TaskId,
+                    Title = task.Title,
+                    Price = task.Price,
+                    Status = task.Status,
+                    Category = task.Category.Name
+                });
+        }
+
         public IEnumerable<DALTask> FindByPredicate(Expression<Func<DALTask, bool>> func)
         {
            throw new NotImplementedException();

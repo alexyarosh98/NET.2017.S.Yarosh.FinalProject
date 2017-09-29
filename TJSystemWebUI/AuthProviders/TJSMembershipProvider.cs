@@ -61,6 +61,7 @@ namespace TJSystemWebUI.AuthProviders
                 return null;
             }
             user.Password = Crypto.HashPassword(user.Password);
+            user.Role=Role.user;
             UserService.Register(user);
             membershipUser = GetUser(user.Email, false);
             return membershipUser;

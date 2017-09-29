@@ -1,0 +1,25 @@
+﻿@model IEnumerable<BLLInterface.Models.UserEntity>
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>Users</h2>
+
+<div>
+    <ul id="userList">
+      @foreach (var user in Model)
+        {
+            <li>
+                
+                @Html.ActionLink(user.Nickname,"ViewAccount","Account",new{Email=user.Email},null)
+
+                <br/>
+                
+                Email: @user.Email
+                <br/>
+                Role: @user.Role.ToString()
+                Roles : @Html.DropDownList("Roles", new SelectList(ViewBag.Roles, user.Role.ToString()))
+            </li>
+        }  
+    </ul>
+</div>

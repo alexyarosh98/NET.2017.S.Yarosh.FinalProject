@@ -74,7 +74,7 @@ namespace TJSystemWebUI.AuthProviders
 
         public override string[] GetAllRoles()
         {
-            throw new NotImplementedException();
+            return Enum.GetNames(typeof(Role));
         }
 
         public override string[] FindUsersInRole(string roleName, string usernameToMatch)

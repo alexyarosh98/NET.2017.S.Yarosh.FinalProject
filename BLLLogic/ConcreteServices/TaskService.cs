@@ -44,6 +44,11 @@ namespace BLLLogic.ConcreteServices
             return taskRepository.GetFullInfo(task.ToDALTask()).ToBllEntity();
         }
 
+        public IEnumerable<TaskEntity> GetUserTasks(string email)
+        {
+            return taskRepository.GetUserTasks(email).Select(t => t.ToBllEntity());
+        }
+
         public IEnumerable<TaskEntity> AllTasksFullInfo()
         {
             throw new NotImplementedException();

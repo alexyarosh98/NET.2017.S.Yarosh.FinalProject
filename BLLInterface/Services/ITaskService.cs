@@ -14,6 +14,7 @@ namespace BLLInterface.Services
         void UpdateTask(TaskEntity task);
         IEnumerable<TaskEntity> AllTasksShortInfo();
         TaskEntity GetTaskFullInfo(TaskEntity task);
+        IEnumerable<TaskEntity> GetUserTasks(string email);
 
     }
 }

@@ -18,10 +18,13 @@
 @*<form action="NewTask" >
     <input type="submit" class="button" value="Add new task"/>
 </form>*@
-@using (Html.BeginForm("NewTask", "Tasks"))
+@if (User.IsInRole("admin"))
 {
-    <input type="submit" class="button" value="Add new task"/>
-    
+    using (Html.BeginForm("NewTask", "Tasks"))
+    {
+        <input type="submit" class="button" value="Add new task"/>
+
+    }
 }
 <div id="wrapper">
     @using (Ajax.BeginForm(ajaxOptions))

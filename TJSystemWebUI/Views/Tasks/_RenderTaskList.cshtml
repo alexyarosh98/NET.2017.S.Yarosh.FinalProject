@@ -1,22 +1,33 @@
 ﻿@model IEnumerable<BLLInterface.Models.TaskEntity>
 
-@foreach (var task in Model)
+@if (Model.FirstOrDefault() == null)
 {
-    <li>
-        <h3 align="left">@task.Title </h3>
-        <h5>
-            Category: @task.Category 
-        </h5>
-        Status: @task.Status
-        <div align="right"><font color="red"> @task.Price $</font>
-            <br/>    
-            @*@Html.ActionLink("Fullinfo","TaskInfo",task)*@
-        </div>
-        @*@Html.ActionLink("Full","_RenderTaskFullInfo",task)*@
-        @Ajax.ActionLink("Full","_RenderTaskFullInfo",task,new AjaxOptions(){UpdateTargetId = $"{task.Id}",InsertionMode = InsertionMode.Replace})
-        @*<div class="spoiler-body" style="display:none">
+    <div>
+        <p>
+            You have no tasks
+        </p>
+    </div>
+}
+else
+{
+foreach (var task in Model)
+ {
+     <li>
+         <h3 align="left">@task.Title </h3>
+         <h5>
+             Category: @task.Category
+         </h5>
+         Status: @task.Status
+         <div align="right"><font color="red"> @task.Price $</font>
+             <br/>
+             @*@Html.ActionLink("Fullinfo","TaskInfo",task)*@
+         </div>
+         @*@Html.ActionLink("Full","_RenderTaskFullInfo",task)*@
+         @Ajax.ActionLink("Full", "_RenderTaskFullInfo", task, new AjaxOptions() {UpdateTargetId = $"{task.Id}", InsertionMode = InsertionMode.Replace})
+         @*<div class="spoiler-body" style="display:none">
         </div>*@
-        <div id=@task.Id></div>
-    
-    </li>
+         <div id=@task.Id></div>
+
+     </li>
+ }
 }

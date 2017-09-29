@@ -24,7 +24,6 @@ namespace TJSystemWebUI.Controllers
             categoryService = _categoryService;
         }
         // GET: Tasks
-        [AllowAnonymous]
         public ActionResult AllTasks()
         {
             
@@ -32,28 +31,33 @@ namespace TJSystemWebUI.Controllers
         }
 
         [ChildActionOnly]
-        [AllowAnonymous]
         public PartialViewResult _RenderTaskList()
         {
-            return PartialView(taskService.AllTasksShortInfo().Reverse());
+            if (User.IsInRole("admin") || User.IsInRole("manager"))
+            {
+                return PartialView(taskService.AllTasksShortInfo().Reverse());
+            }
+            else return PartialView(taskService.GetUserTasks(User.Identity.Name));
         }
 
-       // [AjaxRequestOnly]
-        [AllowAnonymous]
+        // [AjaxRequestOnly]
         public ActionResult _RenderTaskFullInfo(TaskEntity taskEntity)
         {
             
            taskEntity= taskService.GetTaskFullInfo(taskEntity);
             return  PartialView("_RenderTaskFullInfo", taskEntity); //Json(taskEntity, JsonRequestBehavior.AllowGet); 
         }
-        
+
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult AllTasksUpdate()
         {
-            return PartialView("_RenderTaskList", taskService.AllTasksShortInfo().Reverse());
+            if (User.IsInRole("admin") || User.IsInRole("manager"))
+            {
+                return PartialView("_RenderTaskList", taskService.AllTasksShortInfo().Reverse());
+            }
+            else return PartialView("_RenderTaskList", taskService.GetUserTasks(User.Identity.Name).Reverse());
         }
-        [Authorize]
+
         public ActionResult NewTask()
         {
             ViewBag.Categories = categoryService.GetAll().Select(c=>c.Name);
