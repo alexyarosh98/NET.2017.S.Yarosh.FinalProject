@@ -23,8 +23,8 @@
     using (Html.BeginForm("NewTask", "Tasks"))
     {
         <input type="submit" class="button" value="Add new task"/>
-
     }
+    @Html.ActionLink("New task","NewTask")
 }
 <div id="wrapper">
     @using (Ajax.BeginForm(ajaxOptions))

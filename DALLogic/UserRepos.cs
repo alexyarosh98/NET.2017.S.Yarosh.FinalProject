@@ -166,13 +166,23 @@ namespace DALLogic
         public void Update(DALUser entity)
         {
             User userToUp = context.Set<User>().Find(entity.Id);
-            context.Entry(userToUp).CurrentValues.SetValues(entity);
+            //context.Entry(userToUp).CurrentValues.SetValues(entity);
+
+            userToUp.Nickname = entity.Nickname;
+            userToUp.Email = entity.Email;
+            userToUp.Password = entity.Password;
+            userToUp.Rating = entity.Rating;
+            userToUp.Role = entity.Role;
 
             if (!string.IsNullOrEmpty(entity.Firstname) || !string.IsNullOrEmpty(entity.Lastname)
                 || entity.Age != null || entity.Gender != null)
             {
                 UserInfo userInfoToUp = userToUp.UserInfo;
-                context.Entry(userInfoToUp).CurrentValues.SetValues(entity);
+                //context.Entry(userInfoToUp).CurrentValues.SetValues(entity);
+                userInfoToUp.Firstname = entity.Firstname;
+                userInfoToUp.Lastname = entity.Lastname;
+                userInfoToUp.Age = entity.Age;
+                
             }
 
             context.SaveChanges();

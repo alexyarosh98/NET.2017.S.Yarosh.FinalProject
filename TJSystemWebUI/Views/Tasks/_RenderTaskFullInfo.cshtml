@@ -1,19 +1,20 @@
-﻿@model BLLInterface.Models.TaskEntity
-    @{
-        var ajaxOptions = new AjaxOptions()
-        {
-            UpdateTargetId = "list",
-           // Url = Url.Action("_DeleteTask",Model),
-            OnComplete = "OnDeleteClickRefreshList"
-
-        };
-    }
-        
-    
+﻿@using System.Web.UI.WebControls
+@model BLLInterface.Models.TaskEntity
 @{
-    if (User.Identity.Name.Equals(Model.Developer==null?null:Model.Developer.Email))
+    var ajaxOptions = new AjaxOptions()
     {
-        <input type="range"/>
+        UpdateTargetId = "list",
+        // Url = Url.Action("_DeleteTask",Model),
+        OnComplete = "OnDeleteClickRefreshList"
+
+    };
+}
+
+
+@{
+    if (User.Identity.Name.Equals(Model.Developer == null ? null : Model.Developer.Email))
+    {
+        <input type="range" />
     }
 }
 
@@ -24,30 +25,44 @@
             {
                 <input type="submit" value="delete"/>
             }*@
-        @Ajax.ActionLink("Delete","_DeleteTask",Model,ajaxOptions)
+        @Ajax.ActionLink("Delete", "_DeleteTask", Model, ajaxOptions)
     }
 }
 @{
-    if (User.Identity.Name==Model.CreatorUser.Email )
+    if (User.Identity.Name == Model.CreatorUser.Email)
     {
-        @Ajax.ActionLink("update", "_RenderTaskToUpdate", Model, new AjaxOptions {UpdateTargetId = $"{Model.Id}", InsertionMode = InsertionMode.Replace});
+        @Ajax.ActionLink("update", "_RenderTaskToUpdate", Model, new AjaxOptions { UpdateTargetId = $"{Model.Id}", InsertionMode = InsertionMode.Replace });
     }
 
 }
 Description: @Model.Description
 Deadline: @Model.Deadline
-Creator : @Html.ActionLink("Creator", "ViewAccount", "Account", new{ Email=Model.CreatorUser.Email},null)
+Creator : @Html.ActionLink("Creator", "ViewAccount", "Account", new { Email = Model.CreatorUser.Email }, null)
 Creator email : @Model.CreatorUser.Email
 <div id=@string.Format("taskId{0}developer",Model.Id)>
-    Developer: @if (Model.Developer == null)
-               {
-                   @Ajax.ActionLink("become","_BecomeADeveloper",Model,new AjaxOptions()
-                   { UpdateTargetId =$"taskId{Model.Id}developer",InsertionMode = InsertionMode.Replace})
-               }
-               else
-               {
-                   @Html.ActionLink("Developer","ViewAccount","Account",new{Email=Model.Developer.Email},null);
-               }
+    Developer:
+    @if (Model.Developer == null)
+    {
+        @*@Ajax.ActionLink("become","_BecomeADeveloper",Model,new AjaxOptions()
+            { UpdateTargetId =$"taskId{Model.Id}developer",InsertionMode = InsertionMode.Replace})*@
+    if (User.IsInRole("manager"))
+    {
+        using (Ajax.BeginForm(new AjaxOptions(){Url = Url.Action("_BecomeADeveloper"),UpdateTargetId  = $"taskId{Model.Id}developer", InsertionMode = InsertionMode.Replace }))
+        {
+            @Html.DropDownList("Developer", new SelectList(ViewBag.Users, "Email", "Nickname"), "select")
+            <input type="submit"/>
+        }
+            
+        }
+        else
+        {
+            @Html.Raw("None")
+        }
+    }
+    else
+    {
+        @Html.ActionLink("Developer", "ViewAccount", "Account", new { Email = Model.Developer.Email }, null);
+    }
 </div>
 
 

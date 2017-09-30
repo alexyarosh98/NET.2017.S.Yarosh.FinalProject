@@ -18,6 +18,7 @@
         new {Id="c#",Name="C#"},
        new {Id="java",Name="Java"}
     },"Id","Name"),"Select category")*@
+    
     @Html.DropDownList("Category",new SelectList(ViewBag.Categories),"Select")
     @Html.ValidationMessageFor(x => x.Category)
     <br />

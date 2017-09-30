@@ -45,6 +45,9 @@ namespace TJSystemWebUI.Controllers
         {
             
            taskEntity= taskService.GetTaskFullInfo(taskEntity);
+            ViewBag.Users = userService.GetAllUserEntitiesShortInfo()
+                .Where(u => u.Role == Role.user)
+                .Select(u => new {Email = u.Email, Nickname = u.Nickname, Rating = u.Rating});
             return  PartialView("_RenderTaskFullInfo", taskEntity); //Json(taskEntity, JsonRequestBehavior.AllowGet); 
         }
 
@@ -58,6 +61,7 @@ namespace TJSystemWebUI.Controllers
             else return PartialView("_RenderTaskList", taskService.GetUserTasks(User.Identity.Name).Reverse());
         }
 
+        
         public ActionResult NewTask()
         {
             ViewBag.Categories = categoryService.GetAll().Select(c=>c.Name);

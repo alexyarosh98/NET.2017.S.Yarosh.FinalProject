@@ -1,4 +1,5 @@
-﻿@model IEnumerable<BLLInterface.Models.UserEntity>
+﻿@using System.Web.UI.WebControls
+@model IEnumerable<BLLInterface.Models.UserEntity>
 @{
     ViewBag.Title = "Users";
 }
@@ -12,13 +13,20 @@
             <li>
                 
                 @Html.ActionLink(user.Nickname,"ViewAccount","Account",new{Email=user.Email},null)
-
                 <br/>
-                
                 Email: @user.Email
                 <br/>
-                Role: @user.Role.ToString()
-                Roles : @Html.DropDownList("Roles", new SelectList(ViewBag.Roles, user.Role.ToString()))
+                @*Role : @Html.DropDownList("Roles", new SelectList(ViewBag.Roles, user.Role.ToString()))*@
+                
+                @using (Html.BeginForm("UpdateUser", "Account",user))
+                { 
+
+                @Html.DropDownList("Role", new SelectList(ViewBag.Roles, user.Role.ToString()))
+
+                <input type="submit"/>
+                }
+               
+                
             </li>
         }  
     </ul>

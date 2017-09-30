@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.UI.WebControls;
 using BLLInterface.Models;
 using BLLInterface.Services;
 using TJSystemWebUI.AuthProviders;
@@ -152,6 +153,12 @@ namespace TJSystemWebUI.Controllers
            
         }
 
+        [HttpPost]
+        public ActionResult UpdateUser(UserEntity user)
+        {
+            userService.Update(user);
+            return RedirectToAction("Users","Home");
+        }
 
     }
 }
