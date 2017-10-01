@@ -74,20 +74,9 @@ input.button:active {
 
 
 
-/*                       SPOILER FULL TASK INFO                         */
 
-/*.spoiler-title {
-    cursor: pointer;
+.time {
+    color: red;
+    font-size: 20px;
+    
 }
-
-.spoiler-body {
-    display: none;  
-    background: #f1f1f1;
-}*/
-
-
-
-
-
-
-

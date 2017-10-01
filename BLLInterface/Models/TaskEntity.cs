@@ -24,11 +24,20 @@ namespace BLLInterface.Models
         [Required(ErrorMessage = "Description is requiered")]
         public string Description { get; set; }
         [Required(ErrorMessage = "Deadline is required")]
+        [DataType(DataType.Date,ErrorMessage = "Date must be dd/mm/yyy")]
+        [Remote("CheckDate","Tasks",ErrorMessage = "Date must be in the future")]
         public System.DateTime Deadline { get; set; }
         public short Implementation { get; set; }
         public virtual UserEntity CreatorUser { get; set; }
         public virtual UserEntity Developer { get; set; }
-        public TimeSpan TimeLeft {get => Deadline - DateTime.Now; }
+        public TimeSpan TimeLeft {
+            get
+            {
+                if(Deadline>DateTime.Now) return Deadline - DateTime.Now;
+                else return new TimeSpan(0,0,0,0);
+            }
+
+        }
 }
 }
 public enum Status : byte

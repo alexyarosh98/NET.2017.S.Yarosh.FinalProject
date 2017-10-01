@@ -12,13 +12,6 @@
 
 
 @{
-    if (User.Identity.Name.Equals(Model.Developer == null ? null : Model.Developer.Email))
-    {
-        <input type="range" />
-    }
-}
-
-@{
     if (User.Identity.Name.Equals(Model.CreatorUser.Email) || User.IsInRole("admin"))
     {
         @*using (Ajax.BeginForm(ajaxOptions))
@@ -35,28 +28,60 @@
     }
 
 }
-Description: @Model.Description
-Deadline: @Model.Deadline
-Creator : @Html.ActionLink("Creator", "ViewAccount", "Account", new { Email = Model.CreatorUser.Email }, null)
-Creator email : @Model.CreatorUser.Email
+
+@if (Model.Deadline > DateTime.Now)
+{
+    <div align="center" class="time">@Model.TimeLeft.Days days and @Model.TimeLeft.Hours hours left</div>
+}
+else
+{
+    <div align="center">Time is over!</div>
+}
+<br/>
+Implementation:
+@Model.Implementation %
+@if (User.Identity.Name.Equals(Model.Developer == null ? null : Model.Developer.Email))
+{
+    using (Html.BeginForm("_UpdateTask", "Tasks", Model))
+     {
+         <input type = "range" min = "0" max = "4" step = "1" value = "0" />
+         <button type="submit">Submit</button>
+     }
+}
+<br/>
+Description : @Model.Description
+<br/>
+
+
+Creator: @Html.ActionLink("Creator", "ViewAccount", "Account", new { Email = Model.CreatorUser.Email }, null)
+
 <div id=@string.Format("taskId{0}developer",Model.Id)>
+
     Developer:
+    
     @if (Model.Developer == null)
     {
         @*@Ajax.ActionLink("become","_BecomeADeveloper",Model,new AjaxOptions()
             { UpdateTargetId =$"taskId{Model.Id}developer",InsertionMode = InsertionMode.Replace})*@
     if (User.IsInRole("manager"))
     {
-        using (Ajax.BeginForm(new AjaxOptions(){Url = Url.Action("_BecomeADeveloper"),UpdateTargetId  = $"taskId{Model.Id}developer", InsertionMode = InsertionMode.Replace }))
-        {
-            @Html.DropDownList("Developer", new SelectList(ViewBag.Users, "Email", "Nickname"), "select")
-            <input type="submit"/>
-        }
-            
-        }
-        else
-        {
-            @Html.Raw("None")
+        @*using (Ajax.BeginForm(new AjaxOptions(){Url = Url.Action("_BecomeADeveloper"),UpdateTargetId  = $"taskId{Model.Id}developer", InsertionMode = InsertionMode.Replace }))
+            {
+                @Html.DropDownList("Developer", new SelectList(ViewBag.Users, "Email", "Nickname"), "select")
+                <input type="submit"/>
+            }*@
+    using (Html.BeginForm("_BecomeADeveloper", "Tasks", Model))
+    {
+
+        @Html.DropDownList("DeveloperEmail", new SelectList(ViewBag.Users, "Email", "Nickname"), "select")
+        <input type="submit" />
+    }
+    @*@Ajax.ActionLink("become","_BecomeADeveloper",Model,new AjaxOptions()
+        { UpdateTargetId =$"taskId{Model.Id}developer",InsertionMode = InsertionMode.Replace})*@
+    }
+    else
+    {
+        @Html.Raw("None")
         }
     }
     else

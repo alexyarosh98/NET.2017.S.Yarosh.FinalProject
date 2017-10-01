@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using BLLInterface.Models;
 using BLLInterface.Services;
 using TJSystemWebUI.Infastructure;
@@ -69,7 +70,7 @@ namespace TJSystemWebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult NewTask(TaskEntity task,string returnUrl)
+        public ActionResult NewTask(TaskEntity task)
         {
             if (task.Deadline <= DateTime.Now)
             {
@@ -80,8 +81,7 @@ namespace TJSystemWebUI.Controllers
                 task.Status=Status.Awating;
                 task.CreatorUser = userService.GetUser(User.Identity.Name);
                 taskService.CreateTask(task);
-
-                if (Url.IsLocalUrl(returnUrl)) return RedirectToRoute(returnUrl);
+                
                 return RedirectToAction("AllTasks");
             }
             return View();
@@ -92,13 +92,16 @@ namespace TJSystemWebUI.Controllers
         //{
         //    return View(taskService.GetTaskFullInfo(task));
         //}
-        [AjaxRequestOnly]
-        public ActionResult _BecomeADeveloper(TaskEntity task)
+       // [AjaxRequestOnly]
+       [HttpPost]
+        public ActionResult _BecomeADeveloper(TaskEntity task,string developerEmail)
         {
-            task.Developer = userService.GetUser(User.Identity.Name);
+            //task.Developer = userService.GetUser(User.Identity.Name);
+            task.Developer = userService.GetUser(developerEmail);
             task.Status=Status.Developing;
             taskService.UpdateTask(task);
-            return PartialView(task.Developer);
+            return RedirectToAction("AllTasks");
+            // return PartialView(task.Developer);
         }
         [AjaxRequestOnly]
         public void _DeleteTask(TaskEntity taskToDelete)
@@ -116,7 +119,13 @@ namespace TJSystemWebUI.Controllers
         {
             taskService.UpdateTask(updatedTask);
 
-            return PartialView("_RenderTaskFullInfo", updatedTask);
+            return RedirectToAction("AllTasks");
+            // return PartialView("_RenderTaskFullInfo", updatedTask);
+        }
+        [AjaxRequestOnly]
+        public ActionResult CheckDate(DateTime deadline)
+        {
+            return Json(deadline > DateTime.Now, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -8,17 +8,13 @@
 
 @using (Html.BeginForm())
 {
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+       
     @Html.LabelFor(x=>x.Title)
     @Html.EditorFor(x=>x.Title)
     @Html.ValidationMessageFor(x=>x.Title)
     <br/>
     @Html.LabelFor(x=>x.Category)
-    @*@Html.DropDownList("Category",new SelectList(new []
-    {
-        new {Id="c#",Name="C#"},
-       new {Id="java",Name="Java"}
-    },"Id","Name"),"Select category")*@
-    
     @Html.DropDownList("Category",new SelectList(ViewBag.Categories),"Select")
     @Html.ValidationMessageFor(x => x.Category)
     <br />
