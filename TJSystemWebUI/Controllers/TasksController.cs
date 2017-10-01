@@ -45,7 +45,7 @@ namespace TJSystemWebUI.Controllers
         public ActionResult _RenderTaskFullInfo(TaskEntity taskEntity)
         {
             
-           taskEntity= taskService.GetTaskFullInfo(taskEntity);
+           taskEntity= taskService.GetTaskFullInfo(taskEntity.Id);
             ViewBag.Users = userService.GetAllUserEntitiesShortInfo()
                 .Where(u => u.Role == Role.user)
                 .Select(u => new {Email = u.Email, Nickname = u.Nickname, Rating = u.Rating});
@@ -116,10 +116,10 @@ namespace TJSystemWebUI.Controllers
             return PartialView(taskToUpdate);
         }
         [HttpPost]
-        public ActionResult _UpdateTask(TaskEntity model)
+        public ActionResult _UpdateTask(TaskEntity model,int oldTaskId)
         {
             
-            TaskEntity oldTask = taskService.GetTaskFullInfo(model);
+            TaskEntity oldTask = taskService.GetTaskFullInfo(oldTaskId);
 
             oldTask.Title = model.Title;
             oldTask.Description = model.Description;
@@ -129,8 +129,8 @@ namespace TJSystemWebUI.Controllers
                 
             taskService.UpdateTask(oldTask);
 
-            return RedirectToAction("AllTasks");
-            // return PartialView("_RenderTaskFullInfo", updatedTask);
+            //return RedirectToAction("AllTasks");
+             return PartialView("_RenderTaskFullInfo", oldTask);
         }
         [AjaxRequestOnly]
         public ActionResult CheckDate(DateTime deadline)

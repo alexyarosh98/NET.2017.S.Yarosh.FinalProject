@@ -13,7 +13,7 @@ namespace BLLInterface.Services
         void DeleteTask(TaskEntity taskToDel);
         void UpdateTask(TaskEntity task);
         IEnumerable<TaskEntity> AllTasksShortInfo();
-        TaskEntity GetTaskFullInfo(TaskEntity task);
+        TaskEntity GetTaskFullInfo(int taskId);
         IEnumerable<TaskEntity> GetUserTasks(string email);
 
     }

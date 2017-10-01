@@ -39,9 +39,9 @@ namespace BLLLogic.ConcreteServices
             return taskRepository.GetAllShortInfo().Select(i => i.ToBllEntity());
         }
 
-        public TaskEntity GetTaskFullInfo(TaskEntity task)
+        public TaskEntity GetTaskFullInfo(int taskId)
         {
-            return taskRepository.GetFullInfo(task.ToDALTask()).ToBllEntity();
+            return taskRepository.GetFullInfo(taskId).ToBllEntity();
         }
 
         public IEnumerable<TaskEntity> GetUserTasks(string email)

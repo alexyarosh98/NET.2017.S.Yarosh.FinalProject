@@ -131,9 +131,9 @@ namespace DALLogic
             context.SaveChanges();
         }
 
-        public DALTask GetFullInfo(DALTask tasktoUp)
+        public DALTask GetFullInfo(int tasktoUp)
         {
-            Task task = context.Set<Task>().Include("Category").Include("TaskInfo").FirstOrDefault(t => t.TaskId == tasktoUp.Id);
+            Task task = context.Set<Task>().Include("Category").Include("TaskInfo").FirstOrDefault(t => t.TaskId == tasktoUp);
             if(ReferenceEquals(task,null)) throw new InvalidOperationException();
 
             return new DALTask()

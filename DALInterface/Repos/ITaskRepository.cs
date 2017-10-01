@@ -9,7 +9,7 @@ namespace DALInterface.Repos
 {
     public interface ITaskRepository:IRepository<DALTask>
     {
-        DALTask GetFullInfo(DALTask task);
+        DALTask GetFullInfo(int taskId);
         IEnumerable<DALTask> GetUserTasks(string email);
     }
 }

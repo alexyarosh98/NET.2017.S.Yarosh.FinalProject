@@ -29,12 +29,12 @@
 <div id="wrapper">
     @*@using (Ajax.BeginForm(ajaxOptions))*@
     @Ajax.ActionLink("Refresh","AllTasksUpdate",new AjaxOptions(){UpdateTargetId = "list"})
-    {
-        <input type="submit" value="Refresh" id="refreshButton" />
+    
+        @*<input type="submit" value="Refresh" id="refreshButton" />*@
         <ul class="border" id="list" >
             @Html.Action("_RenderTaskList")
         </ul>
-    }
+    
 </div>
 
 @section scripts
