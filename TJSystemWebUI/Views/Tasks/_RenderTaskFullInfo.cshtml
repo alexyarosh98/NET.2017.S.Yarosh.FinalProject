@@ -24,7 +24,7 @@
 @{
     if (User.Identity.Name == Model.CreatorUser.Email)
     {
-        @Ajax.ActionLink("update", "_RenderTaskToUpdate", Model, new AjaxOptions { UpdateTargetId = $"{Model.Id}", InsertionMode = InsertionMode.Replace });
+        @Ajax.ActionLink("update", "_RenderTaskToUpdate", Model, new AjaxOptions { UpdateTargetId = $"{Model.Id}", InsertionMode = InsertionMode.Replace});
     }
 
 }
@@ -98,6 +98,6 @@ Creator: @Html.ActionLink("Creator", "ViewAccount", "Account", new { Email = Mod
 
 
     function OnDeleteClickRefreshList() {
-        document.getElementById("form0").submit();
+        document.getElementById("refreshLink").onclick();
     }
 </script>

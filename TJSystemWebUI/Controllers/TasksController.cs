@@ -52,7 +52,8 @@ namespace TJSystemWebUI.Controllers
             return  PartialView("_RenderTaskFullInfo", taskEntity); //Json(taskEntity, JsonRequestBehavior.AllowGet); 
         }
 
-        [HttpPost]
+     //   [HttpPost]
+     [AjaxRequestOnly]
         public ActionResult AllTasksUpdate()
         {
             if (User.IsInRole("admin") || User.IsInRole("manager"))
@@ -115,9 +116,18 @@ namespace TJSystemWebUI.Controllers
             return PartialView(taskToUpdate);
         }
         [HttpPost]
-        public ActionResult _UpdateTask(TaskEntity updatedTask)
+        public ActionResult _UpdateTask(TaskEntity model)
         {
-            taskService.UpdateTask(updatedTask);
+            
+            TaskEntity oldTask = taskService.GetTaskFullInfo(model);
+
+            oldTask.Title = model.Title;
+            oldTask.Description = model.Description;
+            oldTask.Price = model.Price;
+            oldTask.Category = model.Category;
+            if (model.Deadline != default(DateTime)) oldTask.Deadline = model.Deadline;
+                
+            taskService.UpdateTask(oldTask);
 
             return RedirectToAction("AllTasks");
             // return PartialView("_RenderTaskFullInfo", updatedTask);

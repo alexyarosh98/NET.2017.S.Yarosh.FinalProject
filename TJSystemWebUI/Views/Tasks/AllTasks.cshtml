@@ -27,7 +27,8 @@
     @Html.ActionLink("New task","NewTask")
 }
 <div id="wrapper">
-    @using (Ajax.BeginForm(ajaxOptions))
+    @*@using (Ajax.BeginForm(ajaxOptions))*@
+    @Ajax.ActionLink("Refresh","AllTasksUpdate",new AjaxOptions(){UpdateTargetId = "list"})
     {
         <input type="submit" value="Refresh" id="refreshButton" />
         <ul class="border" id="list" >
@@ -40,7 +41,8 @@
 {
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
     @Scripts.Render("~/bundles/jquery");
-   
+    @Scripts.Render("~/bundles/jqueryval")
+
     
     
     @*<script type="text/javascript">    
