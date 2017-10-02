@@ -43,5 +43,10 @@ namespace TJSystemWebUI.Controllers
             ViewBag.Roles = Roles.Provider.GetAllRoles();
             return View(userService.GetAllUserEntitiesShortInfo());
         }
+        [ChildActionOnly]
+        public ActionResult RenderCarousel()
+        {
+            return PartialView("_RenderCarousel");
+        }
     }
 }

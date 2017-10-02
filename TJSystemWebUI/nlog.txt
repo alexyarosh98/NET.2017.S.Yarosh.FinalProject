@@ -1,2 +1,25 @@
 TasksController.NewTask => TaskService.CreateTask => ConcreteLogger.Info Task njkdsf created by admin
 TJSMembershipProvider.CreateUser => UserService.Register => ConcreteLogger.Info User user12345 created with email user12345@com.com
+TasksController.NewTask => TaskService.CreateTask => ConcreteLogger.Info Task title  created by admin
+TasksController._UpdateTask => TaskService.UpdateTask => ConcreteLogger.Info Task 123123123njnjk updated by admin
+AccountController.UpdateUser => UserService.Update => ConcreteLogger.Info user's role was changed to admin
+AccountController.UpdateUser => UserService.Update => ConcreteLogger.Info user's role was changed to manager
+AccountController.UpdateUser => UserService.Update => ConcreteLogger.Info user's role was changed to admin
+TasksController.NewTask => TaskService.CreateTask => ConcreteLogger.Info Task bhjbjh created by admin
+TasksController._BecomeADeveloper => TaskService.UpdateTask => ConcreteLogger.Info Task bhjbjh has been updated
+TasksController._UpdateTask => TaskService.UpdateTask => ConcreteLogger.Info Task dsada has been updated
+TasksController._UpdateTask => TaskService.UpdateTask => ConcreteLogger.Info Task dsada has been updated
+TasksController._UpdateTask => TaskService.UpdateTask => ConcreteLogger.Info Task dsada has been updated
+AccountController.UpdateUser => UserService.Update => ConcreteLogger.Info user's role was changed to manager
+AccountController.UpdateUser => UserService.Update => ConcreteLogger.Info user's role was changed to admin
+TasksController.NewTask => TaskService.CreateTask => ConcreteLogger.Info Task bhbj created by admin
+TasksController._UpdateTask => TaskService.UpdateTask => ConcreteLogger.Info Task bhbj has been updated
+TasksController._UpdateTask => TaskService.UpdateTask => ConcreteLogger.Info Task bhbj has been updated
+TasksController._UpdateTask => TaskService.UpdateTask => ConcreteLogger.Info Task 123132 has been updated
+TJSMembershipProvider.CreateUser => UserService.Register => ConcreteLogger.Info User mainuser created with email mainuser@com.com
+TasksController.NewTask => TaskService.CreateTask => ConcreteLogger.Info Task 123 created by admin
+TasksController._UpdateTask => TaskService.UpdateTask => ConcreteLogger.Info Task 123 123 123  has been updated
+AccountController.UpdateUser => UserService.Update => ConcreteLogger.Info user5's role was changed to manager
+TasksController._BecomeADeveloper => TaskService.UpdateTask => ConcreteLogger.Info Task 123 123 123  has been updated
+TasksController._UpdateTask => TaskService.UpdateTask => ConcreteLogger.Info Task 123 123 123  has been updated
+TasksController._UpdateTask => TaskService.UpdateTask => ConcreteLogger.Info Task 123 123 123  has been updated

@@ -30,15 +30,15 @@ namespace BLLLogic.ConcreteServices
 
         public void DeleteTask(TaskEntity taskToDel)
         {
+            
             taskRepository.Delete(taskToDel.ToDALTask());
-            logger.Info($"Task {taskToDel.Title} deleted by {taskToDel.CreatorUser.Nickname}");
         }
 
         public void UpdateTask(TaskEntity task)
         {
             taskRepository.Update(task.ToDALTask());
 
-            logger.Info($"Task {task.Title} updated by {task.CreatorUser.Nickname}");
+            logger.Info($"Task {task.Title} has been updated");
         }
 
         public IEnumerable<TaskEntity> AllTasksShortInfo()

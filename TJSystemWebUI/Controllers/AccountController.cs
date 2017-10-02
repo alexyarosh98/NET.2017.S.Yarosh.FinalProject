@@ -16,14 +16,11 @@ namespace TJSystemWebUI.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Account
         private IUserService userService;
         public AccountController(IUserService _service)
         {
             userService = _service;
         }
-        // GET: Account
-
             
         public ActionResult Create()
         {
@@ -72,10 +69,8 @@ namespace TJSystemWebUI.Controllers
             if (ModelState.IsValid)
             {
                 if (Membership.ValidateUser(viewModel.Email, viewModel.Password))
-                    //Проверяет учетные данные пользователя и управляет параметрами пользователей
                 {
                     FormsAuthentication.SetAuthCookie(viewModel.Email, viewModel.RememberMe);
-                    //Управляет службами проверки подлинности с помощью форм для веб-приложений
                     if (Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
@@ -92,46 +87,13 @@ namespace TJSystemWebUI.Controllers
             }
             return View(viewModel);
         }
-
-
-
+        
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
 
             return RedirectToAction("Login", "Account");
         }
-
-
-
-        //[HttpPost]
-        //public ActionResult Login(LogingUserModel model,string returnUrl)
-        //{
-        //    UserEntity authUser;
-        //    try
-        //    {
-        //         authUser = userService.GetUser(model.Email);
-
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        ModelState.AddModelError("", "Incorrect Password or email");
-
-        //        return View();
-        //    }
-
-        //    if (authUser.Password == model.Password)
-        //    {
-        //        FormsAuthentication.SetAuthCookie(authUser.Email,false);
-        //        return Redirect(returnUrl ?? Url.Action("Index","Home"));
-        //    }
-        //    else
-        //    {
-        //        ModelState.AddModelError("","Incorrect Password or email");
-
-        //        return View();
-        //    }
-        //}
 
         [ChildActionOnly]
         public ActionResult LoginPartial()

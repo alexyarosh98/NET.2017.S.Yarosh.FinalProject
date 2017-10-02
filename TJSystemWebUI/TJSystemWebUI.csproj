@@ -185,6 +185,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Image1_big.jpg" />
+    <Content Include="Images\Image2_big.jpg" />
+    <Content Include="Images\Image3_big.jpg" />
+    <Content Include="Images\Image4_big.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -237,6 +241,7 @@
     <Content Include="Views\Tasks\_RenderTaskToUpdate.cshtml" />
     <Content Include="Views\Home\Users.cshtml" />
     <Content Include="Views\Tasks\_RenderTaskUpdatedInfo.cshtml" />
+    <Content Include="Views\Home\_RenderCarousel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

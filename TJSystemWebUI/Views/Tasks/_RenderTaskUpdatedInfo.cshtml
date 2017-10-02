@@ -16,27 +16,25 @@
     Category: @Model.Category
 </h5>
 Status: @Model.Status
-<div align="right"><font color="red"> @Model.Price $</font>
-    <br/>
+<div align="right">
+    <font color="red"> @Model.Price $</font>
+    <br />
 </div>
-@Ajax.ActionLink("Full", "_RenderTaskFullInfo", Model, new AjaxOptions() {UpdateTargetId = $"{Model.Id}", InsertionMode = InsertionMode.Replace})
+@Ajax.ActionLink("Full", "_RenderTaskFullInfo", Model, new AjaxOptions() { UpdateTargetId = $"{Model.Id}", InsertionMode = InsertionMode.Replace })
 
 <div id=@Model.Id>
-    
+
     @{
         if (User.Identity.Name.Equals(Model.CreatorUser.Email) || User.IsInRole("admin"))
         {
-        @*using (Ajax.BeginForm(ajaxOptions))
-            {
-                <input type="submit" value="delete"/>
-            }*@
+
             @Ajax.ActionLink("Delete", "_DeleteTask", Model, ajaxOptions)
         }
     }
     @{
         if (User.Identity.Name == Model.CreatorUser.Email)
         {
-            @Ajax.ActionLink("update", "_RenderTaskToUpdate", Model, new AjaxOptions { UpdateTargetId = $"{Model.Id}fullInfo", InsertionMode = InsertionMode.Replace});
+            @Ajax.ActionLink("update", "_RenderTaskToUpdate", Model, new AjaxOptions { UpdateTargetId = $"{Model.Id}fullInfo", InsertionMode = InsertionMode.Replace });
         }
 
     }
@@ -49,7 +47,7 @@ Status: @Model.Status
     {
         <div align="center">Time is over!</div>
     }
-    <br/>
+    <br />
     Implementation:
     @Model.Implementation %
     @if (User.Identity.Name.Equals(Model.Developer == null ? null : Model.Developer.Email))
@@ -57,7 +55,7 @@ Status: @Model.Status
         using (Ajax.BeginForm(new AjaxOptions()
         {
             Url = Url.Action("_UpdateTask"),
-            UpdateTargetId = Model.Id+"fullInfo",
+            UpdateTargetId = Model.Id + "fullInfo",
             InsertionMode = InsertionMode.Replace,
             HttpMethod = "POST"
 
@@ -65,13 +63,13 @@ Status: @Model.Status
         {
 
             <input type="hidden" name="oldTaskId" value="@Model.Id" />
-            <input type = "range" min = "0" max = "100" step = "10" value = "@Model.Implementation" name = "implementation" />
-            <button type = "submit" > Submit </button>
+            <input type="range" min="0" max="100" step="10" value="@Model.Implementation" name="implementation" />
+            <button type="submit"> Submit </button>
         }
     }
-    <br/>
+    <br />
     Description : @Model.Description
-    <br/>
+    <br />
 
 
     Creator: @Html.ActionLink("Creator", "ViewAccount", "Account", new { Email = Model.CreatorUser.Email }, null)
@@ -79,26 +77,20 @@ Status: @Model.Status
     <div id=@string.Format("taskId{0}developer",Model.Id)>
 
         Developer:
-    
+
         @if (Model.Developer == null)
         {
-        @*@Ajax.ActionLink("become","_BecomeADeveloper",Model,new AjaxOptions()
-            { UpdateTargetId =$"taskId{Model.Id}developer",InsertionMode = InsertionMode.Replace})*@
+
             if (User.IsInRole("manager"))
             {
-        @*using (Ajax.BeginForm(new AjaxOptions(){Url = Url.Action("_BecomeADeveloper"),UpdateTargetId  = $"taskId{Model.Id}developer", InsertionMode = InsertionMode.Replace }))
-            {
-                @Html.DropDownList("Developer", new SelectList(ViewBag.Users, "Email", "Nickname"), "select")
-                <input type="submit"/>
-            }*@
+
                 using (Html.BeginForm("_BecomeADeveloper", "Tasks", Model))
                 {
 
                     @Html.DropDownList("DeveloperEmail", new SelectList(ViewBag.Users, "Email", "Nickname"), "select")
                     <input type="submit" />
                 }
-    @*@Ajax.ActionLink("become","_BecomeADeveloper",Model,new AjaxOptions()
-        { UpdateTargetId =$"taskId{Model.Id}developer",InsertionMode = InsertionMode.Replace})*@
+
             }
             else
             {

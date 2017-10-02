@@ -25,7 +25,6 @@ namespace TJSystemWebUI.Controllers
             userService = _userService;
             categoryService = _categoryService;
         }
-        // GET: Tasks
         public ActionResult AllTasks()
         {
             
@@ -52,9 +51,8 @@ namespace TJSystemWebUI.Controllers
                 .Select(u => new {Email = u.Email, Nickname = u.Nickname, Rating = u.Rating});
             return  PartialView("_RenderTaskFullInfo", taskEntity); //Json(taskEntity, JsonRequestBehavior.AllowGet); 
         }
-
-     //   [HttpPost]
-     [AjaxRequestOnly]
+        
+        [AjaxRequestOnly]
         public ActionResult AllTasksUpdate()
         {
             if (User.IsInRole("admin") || User.IsInRole("manager"))
@@ -89,11 +87,6 @@ namespace TJSystemWebUI.Controllers
             return View();
         }
         
-        
-        //public ActionResult TaskInfo(TaskEntity task)
-        //{
-        //    return View(taskService.GetTaskFullInfo(task));
-        //}
        // [AjaxRequestOnly]
        [HttpPost]
         public ActionResult _BecomeADeveloper(TaskEntity task,string developerEmail)
@@ -107,7 +100,6 @@ namespace TJSystemWebUI.Controllers
             emailService.SendEmailAsync(task.Developer.Email, "New Job", "You now a developer!");
 
             return RedirectToAction("AllTasks");
-            // return PartialView(task.Developer);
         }
         [AjaxRequestOnly]
         public void _DeleteTask(TaskEntity taskToDelete)

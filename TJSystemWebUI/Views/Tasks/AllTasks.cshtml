@@ -2,12 +2,12 @@
 @{
     ViewBag.Title = "AllTasks";
 
-    var ajaxOptions=new AjaxOptions()
+    var ajaxOptions = new AjaxOptions()
     {
         UpdateTargetId = "list",
         Url = Url.Action("AllTasksUpdate"),
         //OnSuccess = "ParseResponse"
-        
+
     };
 
 }
@@ -15,26 +15,19 @@
 <h2 align="center">AllTasks</h2>
 
 
-@*<form action="NewTask" >
-    <input type="submit" class="button" value="Add new task"/>
-</form>*@
+
 @if (User.IsInRole("admin"))
 {
-    using (Html.BeginForm("NewTask", "Tasks"))
-    {
-        <input type="submit" class="button" value="Add new task"/>
-    }
-    @Html.ActionLink("New task","NewTask")
+
+    @Html.ActionLink("New task", "NewTask")
 }
 <div id="wrapper">
-    @*@using (Ajax.BeginForm(ajaxOptions))*@
-    @Ajax.ActionLink("Refresh","AllTasksUpdate",new AjaxOptions(){UpdateTargetId = "list"})
-    
-        @*<input type="submit" value="Refresh" id="refreshButton" />*@
-        <ul class="border" id="list" >
-            @Html.Action("_RenderTaskList")
-        </ul>
-    
+    @Ajax.ActionLink("Refresh", "AllTasksUpdate", new AjaxOptions() { UpdateTargetId = "list" })
+
+    <ul class="border" id="list">
+        @Html.Action("_RenderTaskList")
+    </ul>
+
 </div>
 
 @section scripts
@@ -42,174 +35,6 @@
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
     @Scripts.Render("~/bundles/jquery");
     @Scripts.Render("~/bundles/jqueryval")
-
-    
-    
-    @*<script type="text/javascript">    
-        $(document).ready(function() {
- 
-            // Check for hash value in URL
-            var hash = window.location.hash.substr(1);
-            var href = $('#list li a').each(function(){
-                var href = $(this).attr('href');
-                if(hash==href.substr(0,href.length-5)){
-                    var toLoad = hash+'.html #content';
-                    $('#content').load(toLoad)
-                } 
-            });
- 
-            $('#list li a').click(function(){
- 
-                var toLoad = $(this).attr('href')+' #content';
-                $('#content').hide('fast',loadContent);
-                $('#load').remove();
-                $('#wrapper').append('<span id="load">LOADING...</span>');
-                $('#load').fadeIn('normal');
-                window.location.hash = $(this).attr('href').substr(0,$(this).attr('href').length-5);
-                function loadContent() {
-                    $('#content').load(toLoad,'',showNewContent())
-                }
-                function showNewContent() {
-                    $('#content').show('normal',hideLoader());
-                }
-                function hideLoader() {
-                    $('#load').fadeOut('normal');
-                }
-                return false;
- 
-            });
-        });
-    </script>*@
-
-    
-
-    @*<script type="text/javascript">
-        $(document).ready(function() {
-
-            $('#list li a').click(function(){
- 
-                var toLoad = $(this).attr('href')+' #content';
-                $('#content').hide('fast',loadContent);
-                $('#load').remove();
-                $('#wrapper').append('<span id="load">LOADING...</span>');
-                $('#load').fadeIn('normal');
-                function loadContent() {
-                    $('#content').load(toLoad,'',showNewContent())
-                }
-                function showNewContent() {
-                    $('#content').show('normal',hideLoader());
-                }
-                function hideLoader() {
-                    $('#load').fadeOut('normal');
-                }
-                return false;
- 
-            });
-        });
-    </script>*@
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    @*<script type="text/javascript">
-        $(document).ready(function(){
-            $('.spoiler-body').hide();
-            $('.spoiler-title').click(function(){
-                $(this).next().toggle(500)});
-        });
-    </script>*@
-    
-    
-    
-    
-    @*<script type="text/javascript">
-        $(document).ready(function(){
-            $('#linkId').click(function(){
-                $.ajax({
-                    url: @Html.ActionLink("Fullinf", "_RenderTaskFullInfo"),
-                    cache: false,
-                    beforeSend: function() {
-                        $('#content').html('Loading...');
-                    },
-                    success: function(html){
-                        $("#content").html(html);
-                    }
-                });
-                return false;
-            });
-        });
-    </script>*@
-    
-    
-
-    
-    @*<script type="text/javascript">
-
-        $(document).ready(function () {
-            $("ul.list a").click(function (e) {
-                e.preventDefault();
-
-                $(".content").hide().html('');
-               // $("#indicator").show();
-
-                var url = $(this).attr('href');
-
-                $.getJSON(url, null, function (speaker) {
-                   // $("#indicator").hide();
-
-                    $("#speakerTemplate")
-                        .tmpl(speaker)
-                        .appendTo('.content');
-
-                    $('.content').show();
-                });
-            });
-        });
-    </script>
-    
-    
-    <script id="speakerTemplate" type="text/x-jquery-tmpl">
-        <p>
-            ${Description}
-        </p>
-        <br style="clear:both;" />
-    </script>*@
-
-    @*<script type="text/javascript">
-        function ParseResponse(data) {
-            
-            var target = $("#list");
-            target.empty();
-
-            for (var i = 0; i < data.length; i++) {
-                target.append("<li>" +
-                    "<h3 align=\"left\">" +
-                    data[i].Title +
-                    " </h3>" +
-                    "<h5>" +
-                    "Category: " +
-                    data[i].Category +
-                    "</h5>" +
-                    "Status: " +
-                    data[i].Status +
-                    "<div align=\"right\"><font color=\"red\">" +
-                    data[i].Price +
-                    " $</font>" +
-                    "<br/>" +
-                    @Html.ActionLink("htllo","NewTask").ToString()+
-                    "</div>" +
-                    "</li>"
-                )
-            }
-        }
-    </script>*@
 }
+
+
