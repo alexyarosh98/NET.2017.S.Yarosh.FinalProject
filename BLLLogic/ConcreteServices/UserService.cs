@@ -38,7 +38,7 @@ namespace BLLLogic.ConcreteServices
             return userRepository.GetAllShortInfo().Select(i => i.ToBllUser());
         }
 
-        public void GetAdditionalInfo(UserEntity user)
+        public void GetAdditionalInfo(ref UserEntity user)
         {
             user = userRepository.GetAdditionalInfo(user.ToDalUser()).ToBllUser();
         }

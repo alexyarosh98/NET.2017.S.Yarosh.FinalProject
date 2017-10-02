@@ -12,7 +12,8 @@ else
 {
 foreach (var task in Model)
  {
-     <li>
+     <li id=@string.Format("{0}fullInfo",task.Id)>
+
          <h3 align="left">@task.Title </h3>
          <h5>
              Category: @task.Category
@@ -24,7 +25,7 @@ foreach (var task in Model)
          @Ajax.ActionLink("Full", "_RenderTaskFullInfo", task, new AjaxOptions() {UpdateTargetId = $"{task.Id}", InsertionMode = InsertionMode.Replace})
 
          <div id=@task.Id></div>
-
+         
      </li>
  }
 }

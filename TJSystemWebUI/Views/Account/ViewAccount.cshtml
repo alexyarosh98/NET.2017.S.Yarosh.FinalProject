@@ -3,7 +3,12 @@
     ViewBag.Title = "ViewAccount";
 }
 
-<h2>ViewAccount</h2>
+<h2> @Model.Nickname Account</h2>
 
-@Model.Nickname
-@Model.Email
+Nickname : @Model.Nickname
+<br />
+Role : @Model.Role
+<br />
+First name : @Model.Firstname
+<br />
+Email : <a href="mailto:@Model.Email">Send email</a>

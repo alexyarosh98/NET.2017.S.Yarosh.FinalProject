@@ -113,24 +113,37 @@ namespace TJSystemWebUI.Controllers
 
         public ActionResult _RenderTaskToUpdate(TaskEntity taskToUpdate)
         {
+
+            ViewBag.Categories = categoryService.GetAll().Select(c => c.Name);
             return PartialView(taskToUpdate);
         }
         [HttpPost]
         public ActionResult _UpdateTask(TaskEntity model,int oldTaskId)
         {
-            
             TaskEntity oldTask = taskService.GetTaskFullInfo(oldTaskId);
 
-            oldTask.Title = model.Title;
-            oldTask.Description = model.Description;
-            oldTask.Price = model.Price;
-            oldTask.Category = model.Category;
-            if (model.Deadline != default(DateTime)) oldTask.Deadline = model.Deadline;
+            if (User.IsInRole("admin"))
+            {
                 
+                oldTask.Title = model.Title;
+                oldTask.Description = model.Description;
+                oldTask.Price = model.Price;
+                oldTask.Category = model.Category;
+                if (model.Deadline != default(DateTime)) oldTask.Deadline = model.Deadline;
+
+                taskService.UpdateTask(oldTask);
+                return PartialView("_RenderTaskUpdatedInfo", oldTask);
+            }
+
+            oldTask.Implementation = model.Implementation;
+            if(oldTask.Implementation==100) oldTask.Status=Status.Completed;
+            if(oldTask.Implementation!=100 && oldTask.Status==Status.Completed) oldTask.Status=Status.Developing;
             taskService.UpdateTask(oldTask);
 
-            //return RedirectToAction("AllTasks");
-             return PartialView("_RenderTaskFullInfo", oldTask);
+            return PartialView("_RenderTaskUpdatedInfo", oldTask);
+            //return PartialView("_RenderTaskFullInfo", oldTask);
+
+
         }
         [AjaxRequestOnly]
         public ActionResult CheckDate(DateTime deadline)

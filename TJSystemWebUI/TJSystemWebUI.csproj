@@ -216,6 +216,7 @@
     <Content Include="Views\Tasks\_BecomeADeveloper.cshtml" />
     <Content Include="Views\Tasks\_RenderTaskToUpdate.cshtml" />
     <Content Include="Views\Home\Users.cshtml" />
+    <Content Include="Views\Tasks\_RenderTaskUpdatedInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

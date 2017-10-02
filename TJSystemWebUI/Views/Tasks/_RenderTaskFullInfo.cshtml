@@ -24,7 +24,7 @@
 @{
     if (User.Identity.Name == Model.CreatorUser.Email)
     {
-        @Ajax.ActionLink("update", "_RenderTaskToUpdate", Model, new AjaxOptions { UpdateTargetId = $"{Model.Id}", InsertionMode = InsertionMode.Replace});
+        @Ajax.ActionLink("update", "_RenderTaskToUpdate", Model, new AjaxOptions { UpdateTargetId = $"{Model.Id}fullInfo", InsertionMode = InsertionMode.Replace});
     }
 
 }
@@ -42,10 +42,19 @@ Implementation:
 @Model.Implementation %
 @if (User.Identity.Name.Equals(Model.Developer == null ? null : Model.Developer.Email))
 {
-    using (Html.BeginForm("_UpdateTask", "Tasks", Model))
-     {
-         <input type = "range" min = "0" max = "4" step = "1" value = "0" />
-         <button type="submit">Submit</button>
+    using (Ajax.BeginForm(new AjaxOptions()
+    {
+        Url = Url.Action("_UpdateTask"),
+        UpdateTargetId = Model.Id+"fullInfo",
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST"
+
+    }))
+    {
+
+        <input type="hidden" name="oldTaskId" value="@Model.Id" />
+         <input type = "range" min = "0" max = "100" step = "10" value = "@Model.Implementation" name = "implementation" />
+        <button type = "submit" > Submit </button>
      }
 }
 <br/>

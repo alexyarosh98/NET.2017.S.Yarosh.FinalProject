@@ -25,7 +25,7 @@ namespace TJSystemWebUI.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "TAsk Job System description page.";
 
             return View();
         }
