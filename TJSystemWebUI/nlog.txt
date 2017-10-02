@@ -1,0 +1,2 @@
+TasksController.NewTask => TaskService.CreateTask => ConcreteLogger.Info Task njkdsf created by admin
+TJSMembershipProvider.CreateUser => UserService.Register => ConcreteLogger.Info User user12345 created with email user12345@com.com

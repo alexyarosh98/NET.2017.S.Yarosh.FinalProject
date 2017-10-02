@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BLLInterface;
 using BLLInterface.Models;
 using BLLInterface.Services;
 using BLLLogic.Mappers;
@@ -13,15 +14,19 @@ namespace BLLLogic.ConcreteServices
     public class UserService:IUserService
     {
         private readonly IUserRepository userRepository;
+        private readonly ILogger logger;
 
-        public UserService(IUserRepository _userRepository)
+        public UserService(IUserRepository _userRepository,ILogger _logger)
         {
             userRepository = _userRepository;
+            logger = _logger;
         }
         public void Register(UserEntity newUser)
         {
             if(newUser==null) throw new ArgumentNullException();
             userRepository.Create(newUser.ToDalUser());
+            
+            logger.Info($"User {newUser.Nickname} created with email {newUser.Email}");
         }
 
         public void Unregister(UserEntity userToDel)
@@ -46,6 +51,7 @@ namespace BLLLogic.ConcreteServices
         public void Update(UserEntity user)
         {
             userRepository.Update(user.ToDalUser());
+            logger.Info($"{user.Nickname}'s role was changed to {user.Role}");
         }
 
         public UserEntity GetUser(string email)

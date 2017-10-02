@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using BLLInterface.Models;
 using BLLInterface.Services;
+using SocialApp.Services;
 using TJSystemWebUI.Infastructure;
 
 namespace TJSystemWebUI.Controllers
@@ -101,6 +102,10 @@ namespace TJSystemWebUI.Controllers
             task.Developer = userService.GetUser(developerEmail);
             task.Status=Status.Developing;
             taskService.UpdateTask(task);
+
+            EmailService emailService = new EmailService();
+            emailService.SendEmailAsync(task.Developer.Email, "New Job", "You now a developer!");
+
             return RedirectToAction("AllTasks");
             // return PartialView(task.Developer);
         }

@@ -141,7 +141,7 @@ namespace TJSystemWebUI.Controllers
         public ActionResult ViewAccount(string Email)
         {
             UserEntity user = userService.GetUser(Email);
-            userService.GetAdditionalInfo(user);
+            userService.GetAdditionalInfo(ref user);
             return View(user);
         }
 

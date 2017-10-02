@@ -14,7 +14,7 @@ namespace BLLInterface.Services
         IEnumerable<UserEntity> GetAllUserEntitiesShortInfo();
         UserEntity GetUser(string email);
 
-        void GetAdditionalInfo(UserEntity user);
+        void GetAdditionalInfo(ref UserEntity user);
         void Update(UserEntity user);
 
 

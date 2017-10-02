@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILogger.cs" />
     <Compile Include="Models\CategoryEntity.cs" />
     <Compile Include="Models\TaskEntity.cs" />
     <Compile Include="Models\UserEntity.cs" />
