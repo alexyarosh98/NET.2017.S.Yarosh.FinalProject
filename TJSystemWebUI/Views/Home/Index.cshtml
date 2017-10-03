@@ -47,15 +47,19 @@
   
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#carousel").carousel({ interval: 500, wrap: true })
+            $("#carousel").carousel({
+                interval: 500,
+                wrap: true
+            })
         });
     </script>
  
     <script type="text/javascript">
         jQuery(function () {
-            jQuery("#gallery a").lightBox({
+            jQuery("a.lightbox").lightBox({
                 keyToClose: 'c',
-                txtImage:"sadsadas"
+                txtImage: "sadsadas"
+
             });
         })
     </script>

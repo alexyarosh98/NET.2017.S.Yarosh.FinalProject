@@ -1,4 +1,4 @@
-﻿
+﻿@model int
 
 <div id="carousel" class="carousel slide" @*data-ride="carousel"*@>
     
@@ -10,29 +10,39 @@
     
 
     <div class="carousel-inner">
+        
+        @for (int i = 0; i < Model; i++)
+        {
+            
+        }
+
         <div class="item active" id="1">
             <div class="item-responsive item-16by9">
                 <div class="content row">
-                    <div class="thumbnail col-xs-6" style="width: 50%;height: 100%">
-                        <div id="gallery">
-                            <a href="~/Images/Image3_big.jpg" data-lightbox="image1" >
-                                <img class="img-responsive" src="~/Images/Image1_big.jpg" align="left" style="width: 75%;height: 90%" />
-                            </a>
-                        </div>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+                    <div class="thumbnail col-xs-6" style="width: 50%; height: 100%">
+
+                        <a href="~/Images/Image3_big.jpg" data-lightbox="image1" class="lightbox">
+                            <img src="~/Images/Image1_big.jpg" align="left" style="width: 75%; height: 90%"/>
+                        </a>
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
                         Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et
+
                     </div>
-                    <div class="thumbnail col-xs-6" style="width: 50%;height: 100%">
-                        <<img class="img-responsive" src="~/Images/Image2_big.jpg" align="left" style="width: 75%;height: 90%" />
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+
+                    <div class="thumbnail col-xs-6" style="width: 50%; height: 100%">
+                        <a href="~/Images/Image3_big.jpg" data-lightbox="image2"class="lightbox">
+                            <img src="~/Images/Image2_big.jpg" align="left" style="width: 75%; height: 90%"/>
+                        </a>
+
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
                         Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et
                     </div>
                 </div>
             </div>
 
         </div>
-        
-       
+
+
 
         <a class="left carousel-control" href="#carousel" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left"></span>

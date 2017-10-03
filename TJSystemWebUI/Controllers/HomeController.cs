@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -46,7 +48,16 @@ namespace TJSystemWebUI.Controllers
         [ChildActionOnly]
         public ActionResult RenderCarousel()
         {
-            return PartialView("_RenderCarousel");
+            int numberOfImages=0;
+            DirectoryInfo imageDirectoryInfo = new DirectoryInfo(@"D:\TaskJobSystem\TJSystemWebUI\Images");
+            if (imageDirectoryInfo.Exists)
+            {
+                numberOfImages=imageDirectoryInfo.GetFiles("*.jpg",SearchOption.AllDirectories).Length;
+            }
+            
+
+
+            return PartialView("_RenderCarousel",numberOfImages/2+1);
         }
     }
 }
