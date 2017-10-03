@@ -1,0 +1,28 @@
+﻿body {
+}
+
+/*.carousel-inner img {
+    height: 400px!important;
+    width: 100%;
+}*/
+
+.item-responsive {
+    position: relative; 
+}
+.item-responsive:before {
+    display: block; /* отображать элемент как блок */
+    content: ""; /* содержимое псевдоэлемента */
+    width: 100%; /* ширина элемента */
+}
+.item-16by9 {
+    padding-top: 30%; /* (9:16)*100% */
+}
+.item-responsive>.content {
+    position: absolute; /* абсолютное положение элемент */
+    /* положение элемента */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
+}
